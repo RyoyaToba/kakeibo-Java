@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- raceInformationのMapperXmlファイルです -->
+<mapper namespace="com.demo.repository.ItemMapper" >
+
+    <insert id="insertItem" parameterType="com.demo.entity.Item">
+        <!-- テーブルにデータを挿入するSQL文 -->
+        INSERT INTO Item (
+            name
+            ,price
+            ,target_date
+            ,category_id
+            ,created_by
+            ,created_date
+            ,updated_by
+            ,updated_date
+        ) VALUES (
+            #{name}
+            ,#{price}
+            ,#{targetDate}
+            ,#{categoryId}
+            ,#{createdBy}
+            ,#{createdDate}
+            ,#{updatedBy}
+            ,#{updatedDate}
+        )
+    </insert>
+
+    <select id="retrieveItemInTargetMonth" resultType="com.demo.entity.Item">
+        SELECT
+            id
+            ,name
+            ,price
+            ,target_date
+            ,category_id
+            ,created_by
+            ,created_date
+            ,updated_by
+            ,updated_date
+        FROM
+            item
+        WHERE
+        <![CDATA[#{startDate, jdbcType=DATE} <= target_date]]>
+        AND <![CDATA[#{endDate, jdbcType=DATE} >= target_date]]>
+    </select>
+
+
+    <!--
+    <select id="load" resultType="com.example.domain.dto.HorseProfileDTO"
+            parameterType="com.example.form.HorseProfileSearchForm">
+        SELECT
+        id, name, birth_year, gender, father, mother
+        FROM
+        horse_profile
+        <where>
+            <if test="horseProfileSearchForm.name != ''">
+                name LIKE CONCAT('%', #{horseProfileSearchForm.name},
+                '%')
+            </if>
+            <if test="horseProfileSearchForm.father != ''">
+                AND father LIKE CONCAT('%',
+                #{horseProfileSearchForm.father}, '%')
+            </if>
+            <if test="horseProfileSearchForm.mother != ''">
+                AND mother LIKE CONCAT('%',
+                #{horseProfileSearchForm.mother}, '%')
+            </if>
+            <if test="horseProfileSearchForm.genderList.size != 0">
+                AND
+                <foreach item="horseGender"
+                         collection="horseProfileSearchForm.genderList" open="gender IN("
+                         separator="," close=")">
+                    #{horseGender}
+                </foreach>
+            </if>
+        </where>
+        <if test="limit != null || offset != null">
+            limit #{limit}
+            offset #{offset}
+        </if>
+    </select>
+
+    <select id="getHorseProfileCount" resultType="int"
+            parameterType="com.example.form.HorseProfileSearchForm">
+        SELECT
+        count(id)
+        FROM
+        horse_profile
+        <where>
+            <if test="horseProfileSearchForm.name != ''">
+                name LIKE CONCAT('%', #{horseProfileSearchForm.name},
+                '%')
+            </if>
+            <if test="horseProfileSearchForm.father != ''">
+                AND father LIKE CONCAT('%',
+                #{horseProfileSearchForm.father}, '%')
+            </if>
+            <if test="horseProfileSearchForm.mother != ''">
+                AND mother LIKE CONCAT('%',
+                #{horseProfileSearchForm.mother}, '%')
+            </if>
+            <if test="horseProfileSearchForm.genderList.size != 0">
+                AND
+                <foreach item="horseGender"
+                         collection="horseProfileSearchForm.genderList" open="gender IN("
+                         separator="," close=")">
+                    #{horseGender}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    -->
+
+    <!-- 分離できるらしい -->
+    <!-- include refid= "where句" -->
+    <!-- sql id= "where句" -->
+
+    <!--
+    <select id="loadByNameAndMother"
+            resultType="com.example.domain.dto.HorseProfileDTO">
+        SELECT
+        id, name, birth_year, gender, father, mother
+        FROM
+        horse_profile
+        WHERE
+        name = #{name}
+        AND
+        mother = #{mother}
+    </select>
+
+
+    <select id="loadByCompleteName" parameterType="String"
+            resultType="com.example.domain.dto.HorseProfileDTO">
+        SELECT
+        id, name, birth_year, gender, father, mother
+        FROM
+        horse_profile
+        WHERE
+        name = #{name}
+    </select>
+    -->
+</mapper>

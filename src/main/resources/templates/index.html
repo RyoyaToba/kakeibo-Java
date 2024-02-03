@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ホーム画面</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/table.css">
+
+</head>
+<body>
+<header>
+    <h1>家計簿アプリ</h1>
+</header>
+
+<main>
+    <form th:action="@{/home/spending}" method="post">
+
+        <!-- 名称 -->
+        <label for="name">名称:</label>
+        <input type="text" id="name" name="name">
+
+        <!-- 金額 -->
+        <label for="price">金額:</label>
+        <input type="text" id="price" name="price">
+
+        <!-- カテゴリ -->
+        <label for="categorySelect">カテゴリ:</label>
+        <select id="categorySelect" name="categoryId">
+            <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">
+                Electronics
+            </option>
+            <!-- 他のカテゴリを追加 -->
+        </select>
+
+        <!-- 対象日 -->
+        <label for="targetDate">対象日:</label>
+        <input type="date" id="targetDate" name="targetDate">
+
+        <button>記録</button>
+    </form>
+</main>
+
+    <!--<tr th:each="item : ${items}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price}"></td>
+    </tr>-->
+
+<h2>2023/12 利用料金</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>名称</th>
+        <th>値段</th>
+        <th>カテゴリ</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.name}">行1, 列1</td>
+            <td th:text="${item.price}">行1, 列2</td>
+            <td th:text="${item.category}">行1, 列3</td>
+        </tr>
+    </tbody>
+</table>
+
+<!--<footer>
+    <h5>copyLight Toba</h5>
+</footer>-->
+
+
+<!--<script th:src="@{/script.js}"></script>-->
+</body>
+</html>
