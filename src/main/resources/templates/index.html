@@ -5,12 +5,25 @@
     <title>ホーム画面</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/table.css">
-
+    <link rel="stylesheet" href="/css/navigation.css">
 </head>
 <body>
+
+<!--ヘッダ開始-->
 <header>
     <h1>家計簿アプリ</h1>
 </header>
+<!--ヘッダ終了-->
+<!--ナビゲーションバー開始-->
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+<!--ナビゲーションバー終了-->
 
 <main>
     <form th:action="@{/home/spending}" method="post">
@@ -40,12 +53,9 @@
     </form>
 </main>
 
-    <!--<tr th:each="item : ${items}">
-        <td th:text="${item.name}"></td>
-        <td th:text="${item.price}"></td>
-    </tr>-->
 
 <h2>2023/12 利用料金</h2>
+<h2 id="sum">---</h2>
 
 <table>
     <thead>
@@ -57,9 +67,9 @@
     </thead>
     <tbody>
         <tr th:each="item : ${items}">
-            <td th:text="${item.name}">行1, 列1</td>
-            <td th:text="${item.price}">行1, 列2</td>
-            <td th:text="${item.category}">行1, 列3</td>
+            <td th:text="${item.name}" class="name">行1, 列1</td>
+            <td th:text="${item.price}" class="price">行1, 列2</td>
+            <td th:text="${item.category}" class="category">行1, 列3</td>
         </tr>
     </tbody>
 </table>
@@ -69,6 +79,6 @@
 </footer>-->
 
 
-<!--<script th:src="@{/script.js}"></script>-->
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>
