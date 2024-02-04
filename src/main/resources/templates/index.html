@@ -10,20 +10,8 @@
 <body>
 
 <!--ヘッダ開始-->
-<header>
-    <h1>家計簿アプリ</h1>
-</header>
-<!--ヘッダ終了-->
-<!--ナビゲーションバー開始-->
-<nav>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-</nav>
-<!--ナビゲーションバー終了-->
+<div th:insert="navFrag::header"></div>
+<!--ヘッダー終了-->
 
 <main>
     <form th:action="@{/home/spending}" method="post">
@@ -53,17 +41,25 @@
     </form>
 </main>
 
-
-<h2>2023/12 利用料金</h2>
-<h2 id="sum">---</h2>
+<!--タイトル開始-->
+<div id="title">
+    <h2>2023/12 利用料金</h2>
+    <h2 id="sum">---</h2>
+    <!--年月選択開始-->
+    <select>
+        <option th:each="month : ${months}" th:text="${month}" th:value="${month}">yyyy/mm</option>
+    </select>
+    <!--年月選択終了-->
+</div>
+<!--タイトル終了-->
 
 <table>
     <thead>
-    <tr>
-        <th>名称</th>
-        <th>値段</th>
-        <th>カテゴリ</th>
-    </tr>
+        <tr>
+            <th>名称</th>
+            <th>値段</th>
+            <th>カテゴリ</th>
+        </tr>
     </thead>
     <tbody>
         <tr th:each="item : ${items}">

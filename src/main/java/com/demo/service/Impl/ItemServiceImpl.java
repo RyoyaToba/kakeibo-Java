@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,6 @@ public class ItemServiceImpl implements ItemService {
     /** 新規レコードの追加 */
     @Override
     public void insertItem(Item item) {
-
         itemMapper.insertItem(item);
     }
 
@@ -33,6 +33,7 @@ public class ItemServiceImpl implements ItemService {
         return itemMapper.retrieveItemInTargetMonth(startDate, endDate);
     }
 
+    /** ItemのテーブルデータをUI状態に置き換える */
     @Override
     public List<ItemUI> convertItemToItemUI(List<Item> items, List<Category> categories){
         return items.stream().map(item -> {
@@ -44,5 +45,14 @@ public class ItemServiceImpl implements ItemService {
         }).collect(Collectors.toList());
     }
 
+    /** カテゴリー毎に金額を集計する */
+    @Override
+    public Map<Integer, Integer> totalAmountPerCategory(List<Item> items) {
+        // itemsをカテゴリーIDごとに集計する。(key:categoryId | value:totalPrice)
+        return items.stream().collect(Collectors.groupingBy(
+                        Item::getCategoryId,
+                Collectors.summingInt(Item::getPrice)
+        ));
+    }
 
 }

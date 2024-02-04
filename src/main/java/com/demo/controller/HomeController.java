@@ -1,6 +1,7 @@
 package com.demo.controller;
 
 import com.demo.Model.ItemUI;
+import com.demo.utils.CommonUtils;
 import com.demo.utils.DateUtils;
 import com.demo.utils.ItemUtils;
 import com.demo.entity.Category;
@@ -42,7 +43,6 @@ public class HomeController {
         // categoryを全件取得
         List<Category> categories = categoryService.selectAll();
         model.addAttribute("categories", categories);
-
         // 対象月の月初
         LocalDate startDate = DateUtils.getStartOfMonth(LocalDate.now());
         // 対象月の月末
@@ -51,10 +51,11 @@ public class HomeController {
         List<Item> itemsInTargetMonth = itemService.retrieveItemInTargetMonth(
                                             DateUtils.convertLocalDateToDate(startDate),
                                             DateUtils.convertLocalDateToDate(endDate));
-
         // UI表示形式に変換する
         List<ItemUI> itemUIs = itemService.convertItemToItemUI(itemsInTargetMonth, categories);
-
+        // 年月選択用プルダウン
+        model.addAttribute("months", CommonUtils.retrieveMonths());
+        // 登録済み情報
         model.addAttribute("items", itemUIs);
 
         return "index";

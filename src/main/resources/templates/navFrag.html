@@ -1,0 +1,29 @@
+<!-- header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Fragment Example</title>
+</head>
+<body>
+
+<div th:fragment="header">
+    <!--ヘッダー開始-->
+    <header>
+        <h1>家計簿アプリ</h1>
+    </header>
+    <!--ヘッダ終了-->
+
+    <!--ナビゲーションバー開始-->
+    <nav>
+        <ul>
+            <li><a th:href="@{/home}">Home</a></li>
+            <li><a th:href="@{/category}">カテゴリ</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <!--ナビゲーションバー終了-->
+</div>
+
+</body>
+</html>
