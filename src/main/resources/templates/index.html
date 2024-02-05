@@ -13,6 +13,7 @@
 <div th:insert="navFrag::header"></div>
 <!--ヘッダー終了-->
 
+<!--登録部分開始-->
 <main>
     <form th:action="@{/home/spending}" method="post">
 
@@ -28,7 +29,7 @@
         <label for="categorySelect">カテゴリ:</label>
         <select id="categorySelect" name="categoryId">
             <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">
-                Electronics
+                CategoryName
             </option>
             <!-- 他のカテゴリを追加 -->
         </select>
@@ -40,19 +41,26 @@
         <button>記録</button>
     </form>
 </main>
+<!--登録部分終了-->
 
 <!--タイトル開始-->
 <div id="title">
-    <h2>2023/12 利用料金</h2>
+    <h2 id="month" th:text="${titleMonth}">2023/12</h2>
+    <h2 id="subtitle">利用料金</h2>
     <h2 id="sum">---</h2>
     <!--年月選択開始-->
-    <select>
-        <option th:each="month : ${months}" th:text="${month}" th:value="${month}">yyyy/mm</option>
-    </select>
+    <form th:action="@{/home}" method="post">
+        <select id="targetMonth" name="targetMonth">
+            <option th:each="month : ${months}" th:text="${month}" th:value="${month}">yyyy/mm</option>
+        </select>
+        <button>変更</button>
+    </form>
+
     <!--年月選択終了-->
 </div>
 <!--タイトル終了-->
 
+<!--テーブル開始-->
 <table>
     <thead>
         <tr>
@@ -69,12 +77,13 @@
         </tr>
     </tbody>
 </table>
+<!--テーブル終了-->
 
 <!--<footer>
     <h5>copyLight Toba</h5>
 </footer>-->
 
-
+<script th:src="@{/js/common.js}"></script>
 <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

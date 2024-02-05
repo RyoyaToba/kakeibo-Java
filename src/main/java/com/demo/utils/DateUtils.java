@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateUtils {
@@ -28,7 +29,7 @@ public class DateUtils {
 
     /** 月末日を返す (LocalDate)*/
     public static LocalDate getEndOfMonth(LocalDate date) {
-        return date.withDayOfMonth(LocalDate.now().lengthOfMonth());
+        return date.withDayOfMonth(java.time.LocalDate.now().lengthOfMonth());
     }
 
     /** 日付を文字列から日付型に変換 */
@@ -48,5 +49,11 @@ public class DateUtils {
         return null;
     }
 
+    /** LocalDateで渡された日付をYYYY/MM形式のStringで返す */
+    public static String localDateToStringTitleMonth(LocalDate date) {
+        // LocalDate → String
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return date.format(dateTimeFormatter).substring(0,7); // MMまでを取得
+    }
 
 }

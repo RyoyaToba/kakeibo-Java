@@ -1,11 +1,8 @@
 package com.demo.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CommonUtils {
@@ -30,7 +27,5 @@ public class CommonUtils {
         }
 
         return yearMonths;
-
     }
-    
 }
