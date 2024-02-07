@@ -15,4 +15,7 @@ public interface ItemMapper {
     /** 対象月内の入力情報を取得 */
     List<Item> retrieveItemInTargetMonth(Date startDate, Date endDate);
 
+    /** 削除 */
+    void deleteItem(Integer id);
+
 }

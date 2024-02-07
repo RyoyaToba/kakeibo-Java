@@ -10,13 +10,11 @@ import com.demo.entity.Item;
 import com.demo.form.SpendingForm;
 import com.demo.service.CategoryService;
 import com.demo.service.ItemService;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -48,6 +46,7 @@ public class HomeController {
 
         LocalDate targetDate = null;
 
+        // 初期表示の場合は当月データを取得する
         if (targetMonth == null) {
             targetDate = LocalDate.now();
             targetMonth = DateUtils.localDateToStringTitleMonth(targetDate);
@@ -89,6 +88,16 @@ public class HomeController {
         Item item = ItemUtils.formToItem(spendingForm);
         itemService.insertItem(item);
 
+        return "redirect:/home";
+    }
+
+    /**
+     * itemの削除
+     * @return
+     */
+    @RequestMapping("/delete")
+    public String deleteItem(Integer id) {
+        itemService.deleteItem(id);
         return "redirect:/home";
     }
 

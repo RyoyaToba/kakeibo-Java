@@ -2,12 +2,22 @@ package com.demo.Model;
 
 public class ItemUI {
 
+    /** id */
+    private Integer id;
     /** 名称 */
     private String name;
     /** 価格 */
     private Integer price;
     /** カテゴリ */
     private String category;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
