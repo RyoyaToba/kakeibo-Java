@@ -8,6 +8,9 @@ import java.util.List;
 @Mapper
 public interface CategoryMapper {
 
+    /** カテゴリーを挿入する */
+    void insert(Category category);
+
     /** カテゴリー全件取得 */
     List<Category> selectAll();
 
