@@ -4,6 +4,7 @@
 <!-- raceInformationのMapperXmlファイルです -->
 <mapper namespace="com.demo.repository.CategoryMapper" >
 
+    <!--カテゴリを全件取得する-->
     <select id="selectAll" resultType="com.demo.entity.Category">
         SELECT
             id
@@ -15,5 +16,19 @@
         FROM
             category
     </select>
+
+    <!--カテゴリを新規作成する-->
+    <insert id="insert" parameterType="com.demo.entity.Category">
+        INSERT INTO category
+        (name, created_by, created_date, updated_by, updated_date)
+        VALUES
+        (
+        #{name}
+        ,#{createdBy}
+        ,#{createdDate}
+        ,#{updatedBy}
+        ,#{updatedDate}
+        )
+    </insert>
 
 </mapper>
