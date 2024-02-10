@@ -14,5 +14,7 @@ public interface CategoryMapper {
     /** カテゴリー全件取得 */
     List<Category> selectAll();
 
+    /** 削除 */
+    void delete(Integer id);
 
 }

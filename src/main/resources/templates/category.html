@@ -26,6 +26,24 @@
 </main>
 <!--カテゴリ入力終了-->
 
+<table>
+    <thead>
+    <tr>
+        <th>名称</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categoryUIs}">
+        <form th:action="@{/category/delete}" method="post">
+            <input type="hidden" th:value="${category.id}" name="id">
+            <td th:text="${category.name}" class="name">行1, 列1</td>
+            <td><button>削 除</button></td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+
 
 </body>
 </html>
