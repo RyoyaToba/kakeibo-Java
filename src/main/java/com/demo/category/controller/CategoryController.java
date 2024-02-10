@@ -1,12 +1,15 @@
 package com.demo.category.controller;
 
 import com.demo.category.entity.Category;
+import com.demo.category.model.CategoryUI;
 import com.demo.category.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/category")
@@ -20,7 +23,14 @@ public class CategoryController {
      * @return category.index
      */
     @RequestMapping("")
-    public String categoryPage(){
+    public String categoryPage(Model model){
+
+        // カテゴリの一覧表示
+        List<CategoryUI> categoryUIs
+                = categoryService.convertCategoryToCategoryUI(categoryService.selectAll());
+
+        model.addAttribute("categoryUIs", categoryUIs);
+
         return "category";
     }
 
@@ -44,5 +54,23 @@ public class CategoryController {
 
         return "redirect:/category";
     }
+
+    /**
+     * カテゴリの削除
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delete")
+    public String delete(Integer id) {
+
+        categoryService.delete(id);
+
+        return "redirect:/category";
+    }
+
+
+
+
+
 
 }
