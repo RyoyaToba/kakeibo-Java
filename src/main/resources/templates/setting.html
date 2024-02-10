@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ホーム画面</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+    <link rel="stylesheet" href="/css/setting.css">
+</head>
+<body>
+
+<!--ヘッダ開始-->
+<div th:insert="navFrag::header"></div>
+<!--ヘッダ終了-->
+
+<!---->
+<section>
+    <h2>口 座</h2>
+    <form th:action="@{/setting/account/registration}" method="post">
+        <div class="form-container">
+            <label for="name">名 称:</label>
+            <input type="text" value="" name="name" id="name" />
+        </div>
+        <div class="form-container">
+            <label for="bank"></label>
+            銀行：<input type="radio" value="1" name="type" id="bank" />
+        </div>
+        <div class="form-container">
+            <label for="security"></label>
+            証券：<input type="radio" value="2" name="type" id="security" />
+        </div>
+        <div class="form-container">
+            <label for="balance">残高:</label>
+            <input type="text" value="" name="balance" id="balance" />
+        </div>
+        <div class="form-container">
+            <button>登 録</button>
+        </div>
+    </form>
+
+</section>
+<!---->
+
+<section>
+
+</section>
+
+
+</body>
+</html>
