@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.demo.item.repository.ItemMapper" >
+
+    <insert id="insertItem" parameterType="com.demo.item.entity.Item">
+        <!-- テーブルにデータを挿入するSQL文 -->
+        INSERT INTO Item (
+            name
+            ,price
+            ,target_date
+            ,category_id
+            ,created_by
+            ,created_date
+            ,updated_by
+            ,updated_date
+        ) VALUES (
+            #{name}
+            ,#{price}
+            ,#{targetDate}
+            ,#{categoryId}
+            ,#{createdBy}
+            ,#{createdDate}
+            ,#{updatedBy}
+            ,#{updatedDate}
+        )
+    </insert>
+
+    <!---->
+    <select id="retrieveItemInTargetMonth" resultType="com.demo.item.entity.Item">
+        SELECT
+            id
+            ,name
+            ,price
+            ,target_date
+            ,category_id
+            ,created_by
+            ,created_date
+            ,updated_by
+            ,updated_date
+        FROM
+            item
+        WHERE
+        <![CDATA[#{startDate, jdbcType=DATE} <= target_date]]>
+        AND <![CDATA[#{endDate, jdbcType=DATE} >= target_date]]>
+    </select>
+
+    <!--Itemをidで削除する-->
+    <delete id="deleteItem">
+        DELETE FROM item
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
