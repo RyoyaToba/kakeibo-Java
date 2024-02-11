@@ -6,22 +6,36 @@
     <insert id="insert" parameterType="com.demo.payment.entity.Account">
         <!-- テーブルにデータを挿入するSQL文 -->
         INSERT INTO Account (
-        type
-        ,name
-        ,balance
-        ,created_by
-        ,created_date
-        ,updated_by
-        ,updated_date
+            type
+            ,name
+            ,balance
+            ,created_by
+            ,created_date
+            ,updated_by
+            ,updated_date
         ) VALUES (
-        #{type}
-        ,#{name}
-        ,#{balance}
-        ,#{createdBy}
-        ,#{createdDate}
-        ,#{updatedBy}
-        ,#{updatedDate}
+            #{type}
+            ,#{name}
+            ,#{balance}
+            ,#{createdBy}
+            ,#{createdDate}
+            ,#{updatedBy}
+            ,#{updatedDate}
         )
     </insert>
+
+    <select id="selectAll" resultType="com.demo.payment.entity.Account">
+        SELECT
+            id
+            ,type
+            ,name
+            ,balance
+            ,created_by
+            ,created_date
+            ,updated_by
+            ,updated_date
+        FROM
+            Account
+    </select>
 
 </mapper>
