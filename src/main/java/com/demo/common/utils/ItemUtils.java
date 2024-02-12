@@ -18,6 +18,7 @@ public class ItemUtils {
         item.setName(form.getName());
         item.setPrice(form.getPrice());
         item.setCategoryId(form.getCategoryId());
+        item.setBankSelectId(form.getBankSelectId());
         item.setTargetDate(DateUtils.convertStringToDate(form.getTargetDate()));
         item.setCreatedBy("T00001");
         item.setCreatedDate(new Date());
@@ -25,9 +26,4 @@ public class ItemUtils {
         item.setUpdatedDate(new Date());
         return item;
     }
-
-
-
-
-
 }

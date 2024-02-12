@@ -33,7 +33,13 @@
         <!-- 対象日 -->
         <label for="targetDate">対象日:</label>
         <input type="date" id="targetDate" name="targetDate">
-        <button>記録</button>
+        <!--銀行選択-->
+        <th:block th:each="bank : ${bankAccounts}">
+            <div th:text="${bank.name}"></div>
+            <input type="radio" th:value="${bank.id}" name="bankSelectId"/>
+        </th:block>
+        <br />
+        <button>記 録</button>
     </form>
 </main>
 <!--登録部分終了-->

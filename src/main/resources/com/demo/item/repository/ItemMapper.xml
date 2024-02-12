@@ -10,6 +10,7 @@
             ,price
             ,target_date
             ,category_id
+            ,bank_select_id
             ,created_by
             ,created_date
             ,updated_by
@@ -19,6 +20,7 @@
             ,#{price}
             ,#{targetDate}
             ,#{categoryId}
+            ,#{bankSelectId}
             ,#{createdBy}
             ,#{createdDate}
             ,#{updatedBy}
@@ -26,7 +28,7 @@
         )
     </insert>
 
-    <!---->
+    <!--対象月のItem登録済データを取得-->
     <select id="retrieveItemInTargetMonth" resultType="com.demo.item.entity.Item">
         SELECT
             id
@@ -34,6 +36,7 @@
             ,price
             ,target_date
             ,category_id
+            ,bank_select_id
             ,created_by
             ,created_date
             ,updated_by

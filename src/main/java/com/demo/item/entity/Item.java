@@ -17,6 +17,8 @@ public class Item{
     private Date targetDate;
     /** カテゴリーID */
     private Integer categoryId;
+    /** 引き落とし銀行 */
+    private Integer bankSelectId;
     /** 作成者 */
     private String createdBy;
     /** 作成日 */
@@ -64,6 +66,14 @@ public class Item{
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Integer getBankSelectId() {
+        return bankSelectId;
+    }
+
+    public void setBankSelectId(Integer bankSelectId) {
+        this.bankSelectId = bankSelectId;
     }
 
     public String getCreatedBy() {
