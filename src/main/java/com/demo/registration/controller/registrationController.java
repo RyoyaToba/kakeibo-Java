@@ -7,6 +7,8 @@ import com.demo.common.utils.ItemUtils;
 import com.demo.item.entity.Item;
 import com.demo.item.form.SpendingForm;
 import com.demo.item.service.ItemService;
+import com.demo.payment.entity.Account;
+import com.demo.payment.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,9 @@ public class registrationController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @Autowired
     private CommonService commonService;
@@ -44,6 +49,10 @@ public class registrationController {
         List<Category> categories = categoryService.selectAll();
         model.addAttribute("categories", categories);
 
+        // 銀行口座の情報を全件取得
+        List<Account> accounts = paymentService.selectAll();
+        model.addAttribute("bankAccounts", accounts);
+
         return "registration";
     }
 
@@ -60,7 +69,5 @@ public class registrationController {
 
         return "redirect:/home";
     }
-
-
 
 }

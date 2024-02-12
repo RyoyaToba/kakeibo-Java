@@ -1,7 +1,5 @@
 package com.demo.item.form;
 
-import java.util.Date;
-
 public class SpendingForm {
 
     private String name;
@@ -11,6 +9,8 @@ public class SpendingForm {
     private Integer categoryId;
 
     private String targetDate;
+
+    private Integer bankSelectId;
 
     public String getName() {
         return name;
@@ -42,5 +42,13 @@ public class SpendingForm {
 
     public void setTargetDate(String targetDate) {
         this.targetDate = targetDate;
+    }
+
+    public Integer getBankSelectId() {
+        return bankSelectId;
+    }
+
+    public void setBankSelectId(Integer bankSelectId) {
+        this.bankSelectId = bankSelectId;
     }
 }
