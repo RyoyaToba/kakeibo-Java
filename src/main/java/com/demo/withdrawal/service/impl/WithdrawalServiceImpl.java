@@ -1,0 +1,60 @@
+package com.demo.withdrawal.service.impl;
+
+import com.demo.item.entity.Item;
+import com.demo.payment.entity.Account;
+import com.demo.payment.service.PaymentService;
+import com.demo.withdrawal.Model.Withdrawal;
+import com.demo.withdrawal.service.WithdrawalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Service
+@Transactional
+public class WithdrawalServiceImpl implements WithdrawalService {
+
+    @Autowired
+    private PaymentService paymentService;
+
+    /**
+     * 引き落とし口座ごとに合計金額を算出する。
+     * @param items
+     * @return
+     */
+    @Override
+    public Map<Integer, Integer> calcSumprice(List<Item> items) {
+        return items.stream()
+                .collect(Collectors.groupingBy(
+                        Item::getBankSelectId,
+                        Collectors.summingInt(Item::getPrice))
+                );
+
+    }
+
+    /**  引き落としごとに計算された合計金額から、引き落としオブジェクトに変換する*/
+    @Override
+    public List<Withdrawal> createWithdrawal(Map<Integer, Integer> map) {
+        // 登録している銀行口座を全件取得する
+        List<Account> accounts = paymentService.selectAll();
+        // 引き落としのオブジェクトを作成して返す
+        return map.entrySet().stream()
+                .map(entry -> {
+                    Withdrawal withdrawal = new Withdrawal();
+                    String accountName = accounts.stream()
+                            .filter(account -> account.getId().equals(entry.getKey()))
+                            .map(Account::getName)
+                            .findFirst()
+                            .orElse(null);
+
+                    withdrawal.setBankName(accountName);
+                    withdrawal.setSumPrice(entry.getValue());
+                    return withdrawal;
+                })
+                .collect(Collectors.toList());
+    }
+}

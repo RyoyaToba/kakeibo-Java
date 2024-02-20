@@ -48,3 +48,10 @@ section {
         background-color: #fff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+#withdrawal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; /* 画面の高さいっぱいに広げる場合（任意で調整） */
+}
