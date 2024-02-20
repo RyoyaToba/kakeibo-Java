@@ -29,6 +29,16 @@
 </div>
 <!--タイトル終了-->
 
+
+<section>
+    <div id="withdrawal" th:each="withdrawal : ${withdrawals}">
+        <h2 th:text="${withdrawal.bankName}"></h2>
+        <h2 th:text="${#numbers.formatInteger(withdrawal.sumPrice, 0, 'COMMA')}"></h2>
+    </div>
+
+
+</section>
+
 <!--テーブル開始-->
 <table>
     <thead>
