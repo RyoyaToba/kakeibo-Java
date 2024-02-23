@@ -1,0 +1,40 @@
+/* ホーム画面専用のCSS */
+
+/* 合計金額の表示部分*/
+#sum {
+    font-size: 2.0rem; /* サイズ */
+}
+
+/* 合計金額の表示を中央に */
+#sum-section {
+    text-align: center;
+}
+
+
+#month-select {
+    margin-top: 10px;
+}
+
+#title h4 {
+    margin-right: 20px;
+}
+
+#withdrawal {
+    margin-right: 10px /* 利用料金とyyyy/mmのスペース*/
+}
+
+.title-section h4 {
+    margin-right: 10px; /* 利用料金とyyyy/mmのスペース*/
+    font-weight: bold;
+}
+
+/* 銀行名称 */
+#bank-name {
+    text-align: center;
+}
+
+/* 銀行合計金額 */
+#bank-price {
+    text-align: center;
+}
+

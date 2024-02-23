@@ -8,6 +8,7 @@
           rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/navigation.css">
 </head>
@@ -53,9 +54,11 @@
             <div class="title-section mt-3">
                 <h4 id="withdrawal-title">口 座</h4>
             </div>
-            <div id="withdrawal" th:each="withdrawal : ${withdrawals}">
-                <h3 th:text="${withdrawal.bankName}"></h3>
-                <h3 th:text="${#numbers.formatInteger(withdrawal.sumPrice, 0, 'COMMA')}"></h3>
+            <div id="withdrawal" class="grid" th:each="withdrawal : ${withdrawals}">
+                <div class="row">
+                    <h4 id="bank-name" th:text="${withdrawal.bankName}" class="col-6 mt-3"></h4>
+                    <h4 id="bank-price" th:text="${#numbers.formatInteger(withdrawal.sumPrice, 0, 'COMMA')} + ' 円'" class="col-6 mt-3"></h4>
+                </div>
             </div>
         </div>
     </div>

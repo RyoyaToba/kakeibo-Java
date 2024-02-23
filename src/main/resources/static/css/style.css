@@ -1,3 +1,5 @@
+/* 全ページに共通するようなCSS */
+
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -29,41 +31,12 @@ footer {
     color: #fff;
 }
 
-
-#title h4 {
-    margin-right: 20px;
-}
-
-
-#withdrawal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* height: 100vh; /* 画面の高さいっぱいに広げる場合（任意で調整） */
-}
-
 /* 各項目のタイトル部分の調整*/
 .title-section {
     display: flex;
 }
 
 .title-section h4 {
-    margin-right: 10px /* 利用料金とyyyy/mmのスペース*/
-}
-
-#sum-section {
-    text-align: center;
-}
-
-/* 合計金額の表示部分*/
-#sum {
-    font-size: 2.0rem; /* サイズ */
-}
-
-#date-section select {
-    margin-right: 10px; /* プルダウンの右側に間隔を開ける */
-}
-
-#month-select {
-    margin-top: 10px;
+    margin-right: 10px; /* 利用料金とyyyy/mmのスペース*/
+    font-weight: bold;
 }
