@@ -20,7 +20,7 @@
 <!--ヘッダ終了-->
 
 <!--登録部分開始-->
-<main class="container">
+<div class="container bg-light text-emphasis-light">
     <div class="title-section mt-3">
         <h4 id="registration-title">要素を登録</h4>
     </div>
@@ -28,8 +28,8 @@
     <form class="row" th:action="@{/registration/spending}" method="post">
         <!-- 名称 -->
         <div id="name-section" class="col-md-3">
-                <label for="name">名 称</label>
-                <input type="text" id="name" name="name" class="form-control">
+            <label for="name">名 称</label>
+            <input type="text" id="name" name="name" class="form-control">
         </div>
 
         <!-- 金額 -->
@@ -62,12 +62,12 @@
                 <label th:text="${bank.name}" class="form-check-label"></label>
             </div>
         </div>
-        <div class="text-center col-md-12">
+        <div class="text-center col-md-12 mb-3">
             <button type="submit" id="item-submit" class="btn btn-primary">登 録</button>
         </div>
     </form>
 
-</main>
+</div>
 <!--登録部分終了-->
 
 </body>
