@@ -17,16 +17,24 @@
 <!--ヘッダ終了-->
 
 <!--カテゴリ入力開始-->
-<main>
-    <form th:action="@{/category/newCreate}" method="post">
+<div class="container bg-light text-emphasis-light">
+    <div class="row">
+        <div class="col-12">
+            <form th:action="@{/category/newCreate}" method="post">
+                    <div class="title-section mt-3">
+                        <h4 id="category-title">カテゴリを登録してください</h4>
+                    </div>
+                    <!-- 名称 -->
+                    <label for="name">カテゴリ名:</label>
+                    <input type="text" id="name" class="form-control" name="name">
 
-        <!-- 名称 -->
-        <label for="name">カテゴリ名:</label>
-        <input type="text" id="name" name="name">
-
-        <button>追加</button>
-    </form>
-</main>
+                <div class="text-center mt-3 mb-3">
+                    <button type="submit" id="category-submit" class="btn btn-primary">追 加</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!--カテゴリ入力終了-->
 
 <table>
@@ -41,7 +49,7 @@
         <form th:action="@{/category/delete}" method="post">
             <input type="hidden" th:value="${category.id}" name="id">
             <td th:text="${category.name}" class="name">行1, 列1</td>
-            <td><button>削 除</button></td>
+            <td><button class="btn btn-danger btn-sm">削 除</button></td>
         </form>
     </tr>
     </tbody>
