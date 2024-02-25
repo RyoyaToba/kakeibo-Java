@@ -20,13 +20,16 @@
 <div class="container bg-light text-emphasis-light">
     <div class="row">
         <div class="col-12">
-            <form th:action="@{/category/newCreate}" method="post">
+            <form th:action="@{/category/newCreate}" th:object="${categoryForm}" method="post">
+
                     <div class="title-section mt-3">
                         <h4 id="category-title">カテゴリを登録してください</h4>
                     </div>
+
                     <!-- 名称 -->
-                    <label for="name">カテゴリ名:</label>
-                    <input type="text" id="name" class="form-control" name="name">
+                    <label for="name">カテゴリ名：</label>
+                    <span th:errors="*{name}" style="color:red">名称の入力は必須です</span>
+                    <input type="text" id="name" class="form-control" name="name" th:field="*{name}">
 
                 <div class="text-center mt-3 mb-3">
                     <button type="submit" id="category-submit" class="btn btn-primary">追 加</button>

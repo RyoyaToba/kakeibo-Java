@@ -1,11 +1,15 @@
 package com.demo.category.controller;
 
 import com.demo.category.entity.Category;
+import com.demo.category.form.CategoryForm;
 import com.demo.category.model.CategoryUI;
 import com.demo.category.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
@@ -16,7 +20,12 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    public CategoryService categoryService;
+    private CategoryService categoryService;
+
+    @ModelAttribute
+    private CategoryForm setCategoryForm(){
+        return new CategoryForm();
+    }
 
     /**
      * category Page
@@ -34,17 +43,24 @@ public class CategoryController {
         return "category";
     }
 
-
     /**
      * カテゴリの新規作成
-     * @param name
-     * @return
+     * @param categoryForm 入力値を受け取るフォーム
+     * @return カテゴリページへのリダイレクト
      */
     @RequestMapping("/newCreate")
-    public String newCreate(String name) {
+    public String newCreate(
+            @Validated CategoryForm categoryForm
+            ,BindingResult result
+            ,Model model
+    ) {
+
+        if (result.hasErrors()){
+            return categoryPage(model);
+        }
 
         Category category = new Category();
-        category.setName(name);
+        category.setName(categoryForm.getName());
         category.setCreatedBy("T00001");
         category.setCreatedDate(new Date());
         category.setUpdatedBy("T00001");
@@ -67,10 +83,5 @@ public class CategoryController {
 
         return "redirect:/category";
     }
-
-
-
-
-
 
 }

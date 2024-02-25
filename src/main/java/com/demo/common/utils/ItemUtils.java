@@ -1,7 +1,7 @@
 package com.demo.common.utils;
 
 import com.demo.item.entity.Item;
-import com.demo.item.form.SpendingForm;
+import com.demo.registration.form.SpendingForm;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ public class ItemUtils {
 
         Item item = new Item();
         item.setName(form.getName());
-        item.setPrice(form.getPrice());
+        item.setPrice(Integer.parseInt(form.getPrice()));
         item.setCategoryId(form.getCategoryId());
         item.setBankSelectId(form.getBankSelectId());
         item.setTargetDate(DateUtils.convertStringToDate(form.getTargetDate()));
