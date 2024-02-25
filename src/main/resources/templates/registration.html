@@ -25,23 +25,26 @@
         <h4 id="registration-title">要素を登録</h4>
     </div>
 
-    <form class="row" th:action="@{/registration/spending}" method="post">
+    <form class="row" th:action="@{/registration/spending}" th:object="${spendingForm}" method="post">
         <!-- 名称 -->
         <div id="name-section" class="col-md-3">
-            <label for="name">名 称</label>
-            <input type="text" id="name" name="name" class="form-control">
+            <!-- エラーメッセージを表示 -->
+            <label for="name">名 称：</label>
+            <span th:errors="*{name}" style="color:red">名称の入力は必須です</span>
+            <input type="text" id="name" name="name" class="form-control" th:field="*{name}">
         </div>
 
         <!-- 金額 -->
         <div id="price-section" class="col-md-3">
-            <label for="price">金 額</label>
-            <input type="text" id="price" name="price" class="form-control">
+            <label for="price">金 額：</label>
+            <span th:errors="*{price}" style="color:red">金額の入力は必須です</span>
+            <input type="text" id="price" name="price" class="form-control" th:field="*{price}">
         </div>
 
         <!-- カテゴリ -->
         <div id="category-section" class="col-md-3">
-            <label for="categorySelect">カテゴリ</label>
-            <select id="categorySelect" name="categoryId" class="form-control">
+            <label for="categorySelect">カテゴリ：</label>
+            <select id="categorySelect" name="categoryId" class="form-control" th:field="*{categoryId}">
                 <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}">
                     CategoryName
                 </option>
@@ -50,15 +53,15 @@
 
         <!-- 対象日 -->
         <div id="date-section" class="col-md-3">
-            <label for="targetDate">対象日:</label>
-            <input type="date" id="targetDate" name="targetDate" class="form-control">
+            <label for="targetDate">対象日：</label>
+            <input type="date" id="targetDate" name="targetDate" class="form-control" th:field="*{targetDate}">
         </div>
 
         <!--銀行選択-->
         <div id="bank-section" class="col-md-12">
             <div>引き落とされる口座を選択してください</div>
             <div class="form-check" th:each="bank : ${bankAccounts}">
-                <input type="radio" th:value="${bank.id}" name="bankSelectId" class="form-check-input" />
+                <input type="radio" th:value="${bank.id}" name="bankSelectId" class="form-check-input" th:field="*{bankSelectId}" />
                 <label th:text="${bank.name}" class="form-check-label"></label>
             </div>
         </div>

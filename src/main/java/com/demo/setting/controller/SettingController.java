@@ -4,9 +4,13 @@ import com.demo.master.entity.AccountTypeMaster;
 import com.demo.payment.entity.Account;
 import com.demo.payment.model.AccountUI;
 import com.demo.payment.service.PaymentService;
+import com.demo.setting.form.AccountForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
@@ -18,6 +22,11 @@ public class SettingController {
 
     @Autowired
     private PaymentService paymentService;
+
+    @ModelAttribute
+    private AccountForm setAccountForm() {
+        return new AccountForm();
+    }
 
     @RequestMapping("")
     public String settingPage(Model model) {
@@ -33,13 +42,21 @@ public class SettingController {
     }
 
     @RequestMapping("/account/registration")
-    public String accountRegistration(String name, String type, String balance) {
+    public String accountRegistration(
+            @Validated AccountForm accountForm
+            , BindingResult result
+            , Model model
+    ) {
 
-        Integer typeInt = Integer.parseInt(type);
-        Integer balanceInt = Integer.parseInt(balance);
+        if (result.hasErrors()) {
+            return settingPage(model);
+        }
+
+        Integer typeInt = Integer.parseInt(accountForm.getType());
+        Integer balanceInt = Integer.parseInt(accountForm.getBalance());
 
         Account account = new Account();
-        account.setName(name);
+        account.setName(accountForm.getName());
         account.setType(typeInt);
         account.setBalance(balanceInt);
         account.setCreatedBy("T00001");

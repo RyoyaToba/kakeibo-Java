@@ -24,33 +24,33 @@
             <div class="title-section mt-3">
                 <h4>口 座</h4>
             </div>
-            <form class="row" th:action="@{/setting/account/registration}" method="post">
+            <form class="row" th:action="@{/setting/account/registration}" method="post" th:object="${accountForm}">
 
                 <!--名称-->
                 <div class="col-md-6">
-                    <label for="name">名 称:</label>
-                    <input type="text" value="" name="name" id="name" class="form-control" />
+                    <label for="name">名 称：</label>
+                    <span th:errors="*{name}" style="color:red">名称の入力は必須です</span>
+                    <input type="text" value="" name="name" id="name" class="form-control" th:field="*{name}"/>
                 </div>
                 <!--名称終了-->
 
                 <!--残高入力-->
                 <div class="col-md-6">
-                    <label for="balance">残高:</label>
-                    <input type="text" value="" name="balance" id="balance" class="form-control" />
+                    <label for="balance">残高：</label>
+                    <span th:errors="*{balance}" style="color:red">残高の入力は必須です</span>
+                    <input type="text" value="" name="balance" id="balance" class="form-control" th:field="*{balance}"/>
                 </div>
                 <!--残高入力終了-->
 
                 <!--口座タイプ-->
                 <div class="col-md-12">
                     <label for="bank"></label>
-                    銀行：<input type="radio" value="1" name="type" id="bank" class="form-control" />
+                    銀行：<input type="radio" value="1" name="type" id="bank" class="form-control" th:field="*{type}"/>
 
                     <label for="security"></label>
-                    証券：<input type="radio" value="2" name="type" id="security" class="form-control" />
+                    証券：<input type="radio" value="2" name="type" id="security" class="form-control" th:field="*{type}"/>
                 </div>
                 <!--口座タイプ終了-->
-
-
 
                 <div class="text-center col-md-12 mt-3 mb-3">
                     <button type="submit" class="btn btn-primary">登 録</button>

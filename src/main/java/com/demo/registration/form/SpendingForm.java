@@ -1,15 +1,22 @@
-package com.demo.item.form;
+package com.demo.registration.form;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class SpendingForm {
 
+    @NotBlank(message = "名称は必須です")
     private String name;
 
-    private Integer price;
+    @NotBlank(message = "金額は必須です")
+    private String price;
 
     private Integer categoryId;
 
+    @NotNull(message = "日付入力は必須です")
     private String targetDate;
 
+    @NotNull(message = "引き落としの口座選択は必須です")
     private Integer bankSelectId;
 
     public String getName() {
@@ -20,11 +27,11 @@ public class SpendingForm {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
