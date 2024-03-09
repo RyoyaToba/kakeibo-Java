@@ -29,7 +29,7 @@ public class DateUtils {
 
     /** 月末日を返す (LocalDate)*/
     public static LocalDate getEndOfMonth(LocalDate date) {
-        return date.withDayOfMonth(java.time.LocalDate.now().lengthOfMonth());
+        return date.withDayOfMonth(date.getMonth().length(date.isLeapYear()));
     }
 
     /** 日付を文字列から日付型に変換 */
