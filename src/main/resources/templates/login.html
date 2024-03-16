@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+</head>
+<body>
+<h2>Login</h2>
+<!--SecurityConfigクラスでformLogin().loginPage("/login")として設定されたものと一致させる-->
+<form th:action="@{/login}" method="post">
+    <!-- エラーメッセージの表示 -->
+    <div th:if="${param.error}">
+        ログインに失敗しました
+        <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
+            <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
+        </div>
+        <div th:if="${param.logout}">
+            ログアウトしました
+        </div>
+    </div>
+    <div>
+        <label for="username">UserId:</label>
+        <input type="text" id="username" class="form-control" name="username" required autofocus />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" class="form-control" name="password" required />
+    </div>
+    <button type="submit">login</button>
+</form>
+<script th:src="@{/js/common.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+</body>
+</html>
