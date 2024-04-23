@@ -16,6 +16,6 @@ public interface ItemMapper {
     List<Item> retrieveItemInTargetMonth(Date startDate, Date endDate);
 
     /** 削除 */
-    void deleteItem(Integer id);
+    void deleteItem(Integer itemId, String userId);
 
 }

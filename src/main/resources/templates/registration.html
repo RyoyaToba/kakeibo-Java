@@ -61,7 +61,7 @@
         <div id="bank-section" class="col-md-12">
             <div>引き落とされる口座を選択してください</div>
             <div class="form-check" th:each="bank : ${bankAccounts}">
-                <input type="radio" th:value="${bank.id}" name="bankSelectId" class="form-check-input" th:field="*{bankSelectId}" />
+                <input type="radio" th:value="${bank.accountId}" name="bankSelectId" class="form-check-input" th:field="*{bankSelectId}" />
                 <label th:text="${bank.name}" class="form-check-label"></label>
             </div>
         </div>

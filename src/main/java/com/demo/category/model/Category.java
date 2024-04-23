@@ -3,8 +3,10 @@ package com.demo.category.model;
 import java.util.Date;
 
 public class Category {
+    /** ユーザID*/
+    private String userId;
     /** categoryId */
-    private Integer id;
+    private Integer categoryId;
     /** カテゴリー名 */
     private String name;
     /** 作成者 */
@@ -16,12 +18,20 @@ public class Category {
     /** 更新日 */
     private Date updatedDate;
 
-    public Integer getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {

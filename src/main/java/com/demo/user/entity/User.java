@@ -1,16 +1,14 @@
-package com.demo.payment.entity;
+package com.demo.user.entity;
 
 import java.util.Date;
 
-public class Account {
-    /** 口座ID */
-    private Integer id;
-    /** 口座タイプ */
-    private Integer type;
-    /** 口座名称 */
-    private String name;
-    /** 残高 */
-    private Integer balance;
+public class User {
+    /** ユーザID */
+    private String userId;
+    /** シリアルナンバー */
+    private Integer serialNumber;
+    /** メールアドレス */
+    private String mailAddress;
     /** 作成者 */
     private String createdBy;
     /** 作成日 */
@@ -20,36 +18,28 @@ public class Account {
     /** 更新日 */
     private Date updatedDate;
 
-    public Integer getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public Integer getType() {
-        return type;
+    public Integer getSerialNumber() {
+        return serialNumber;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setSerialNumber(Integer serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
-    public String getName() {
-        return name;
+    public String getMailAddress() {
+        return mailAddress;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Integer balance) {
-        this.balance = balance;
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
     }
 
     public String getCreatedBy() {
@@ -83,5 +73,4 @@ public class Account {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
-
 }

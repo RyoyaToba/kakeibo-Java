@@ -13,6 +13,7 @@
     <!--ヘッダー開始-->
     <header>
         <h1>家計簿アプリ</h1>
+        <p th:text="'ようこそ、' + ${session.user.userId} + 'さん'"></p>
     </header>
     <!--ヘッダ終了-->
 
@@ -23,6 +24,7 @@
             <li><a th:href="@{/registration}">登録</a></li>
             <li><a th:href="@{/category}">カテゴリ</a></li>
             <li><a th:href="@{/setting}">設定</a></li>
+            <li><a th:href="@{/logout}">ログアウト</a></li>
         </ul>
     </nav>
     <!--ナビゲーションバー終了-->

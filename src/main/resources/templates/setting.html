@@ -76,7 +76,7 @@
         <tbody>
         <tr th:each="account : ${accounts}">
             <form th:action="@{#}" method="post">
-                <input type="hidden" th:value="${account.id}" name="id"/>
+                <input type="hidden" th:value="${account.accountId}" name="id"/>
                 <td th:text="${account.accountName}" class="name">行1, 列1</td>
                 <td th:text="${account.accountTypeName}" class="typeName">行1, 列1</td>
                 <td th:text="${#numbers.formatInteger(account.balance, 0, 'COMMA')}" class="balance">行1, 列2</td>

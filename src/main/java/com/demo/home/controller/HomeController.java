@@ -9,6 +9,7 @@ import com.demo.item.entity.Item;
 import com.demo.registration.form.SpendingForm;
 import com.demo.category.service.CategoryService;
 import com.demo.item.service.ItemService;
+import com.demo.user.entity.User;
 import com.demo.withdrawal.Model.Withdrawal;
 import com.demo.withdrawal.service.WithdrawalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,6 +38,9 @@ public class HomeController {
     @Autowired
     private CommonService commonService;
 
+    @Autowired
+    private HttpSession session;
+
     @ModelAttribute
     private SpendingForm setSpendingForm() {
         return new SpendingForm();
@@ -47,6 +52,8 @@ public class HomeController {
      */
     @RequestMapping("")
     public String index(String targetMonth, Model model) {
+
+        User user = (User) session.getAttribute("user");
 
         LocalDate targetDate = null;
 
@@ -81,6 +88,7 @@ public class HomeController {
         // 引き落とし口座ごとに金額をまとめ、引き落としオブジェクトのリストを返す
         List<Withdrawal> withdrawals = withdrawalService.createWithdrawal(
                 withdrawalService.calcSumprice(itemsInTargetMonth)
+                , user.getUserId()
         );
 
         // 各口座からの引き落とし金額
@@ -95,8 +103,9 @@ public class HomeController {
      * @return
      */
     @RequestMapping("/delete")
-    public String deleteItem(Integer id) {
-        itemService.deleteItem(id);
+    public String deleteItem(Integer itemId) {
+        User user = (User) session.getAttribute("user");
+        itemService.deleteItem(itemId, user.getUserId());
         return "redirect:/home";
     }
 

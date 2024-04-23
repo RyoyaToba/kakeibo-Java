@@ -1,14 +1,16 @@
-package com.demo.category.entity;
+package com.demo.login.entity;
 
 import java.util.Date;
 
-public class Category {
-    /** userId */
+public class LoginInformation {
+
+    /** ユーザID */
     private String userId;
-    /** categoryId */
-    private Integer categoryId;
-    /** カテゴリー名 */
-    private String name;
+    /** シリアルナンバー */
+    private Integer serialNumber;
+    /** パスワード */
+    private String password;
+
     /** 作成者 */
     private String createdBy;
     /** 作成日 */
@@ -26,20 +28,20 @@ public class Category {
         this.userId = userId;
     }
 
-    public Integer getId() {
-        return categoryId;
+    public Integer getSerialNumber() {
+        return serialNumber;
     }
 
-    public void setId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setSerialNumber(Integer serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCreatedBy() {

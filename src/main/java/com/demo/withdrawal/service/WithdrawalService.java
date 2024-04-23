@@ -12,6 +12,6 @@ public interface WithdrawalService {
     Map<Integer, Integer> calcSumprice(List<Item> items);
 
     /**  */
-    List<Withdrawal> createWithdrawal(Map<Integer, Integer> map);
+    List<Withdrawal> createWithdrawal(Map<Integer, Integer> map, String userId);
 
 }

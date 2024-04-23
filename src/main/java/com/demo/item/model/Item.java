@@ -6,9 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 public class Item {
-
-    /** id */
-    private Integer id;
+    /** ユーザID */
+    private String userId;
+    /** itemId */
+    private Integer itemId;
     /** 名前 */
     private String name;
     /** 価格 */
@@ -26,12 +27,20 @@ public class Item {
     /** 更新日 */
     private Date updatedDate;
 
-    public Integer getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
     }
 
     public String getName() {
@@ -101,7 +110,7 @@ public class Item {
     /** カテゴリIDをカテゴリに変換する */
     public String convertCategoryIdToCategory(List<Category> categories) {
         return categories.stream()
-                .filter(e -> e.getId().equals(getCategoryId()))
+                .filter(e -> e.getCategoryId().equals(getCategoryId()))
                 .map(Category::getName)
                 .findFirst()
                 .orElse("1");

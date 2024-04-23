@@ -4,6 +4,7 @@ import com.demo.category.entity.Category;
 import com.demo.category.form.CategoryForm;
 import com.demo.category.model.CategoryUI;
 import com.demo.category.service.CategoryService;
+import com.demo.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -51,15 +53,19 @@ public class CategoryController {
     @RequestMapping("/newCreate")
     public String newCreate(
             @Validated CategoryForm categoryForm
-            ,BindingResult result
-            ,Model model
-    ) {
+            , BindingResult result
+            , Model model
+            , HttpSession session
+            ) {
 
         if (result.hasErrors()){
             return categoryPage(model);
         }
 
+        User user = (User)session.getAttribute("user");
+
         Category category = new Category();
+        category.setUserId(user.getUserId());
         category.setName(categoryForm.getName());
         category.setCreatedBy("T00001");
         category.setCreatedDate(new Date());

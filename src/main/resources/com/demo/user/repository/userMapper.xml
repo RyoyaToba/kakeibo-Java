@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.demo.payment.repository.PaymentMapper" >
+<mapper namespace="com.demo.user.repository.UserMapper" >
 
-    <insert id="insert" parameterType="com.demo.payment.entity.BankAccount">
+    <insert id="insert" parameterType="com.demo.user.entity.User">
         <!-- テーブルにデータを挿入するSQL文 -->
-        INSERT INTO bank_account (
+        INSERT INTO user_information (
             user_id
-            ,type
-            ,name
-            ,balance
+            ,mail_address
             ,created_by
             ,created_date
             ,updated_by
             ,updated_date
         ) VALUES (
             #{userId}
-            ,#{type}
-            ,#{name}
-            ,#{balance}
+            ,#{mailAddress}
             ,#{createdBy}
             ,#{createdDate}
             ,#{updatedBy}
@@ -26,19 +22,17 @@
         )
     </insert>
 
-    <select id="loadByUserId" resultType="com.demo.payment.entity.BankAccount">
+    <select id="select" resultType="com.demo.user.entity.User">
         SELECT
             user_id
-            ,account_id
-            ,type
-            ,name
-            ,balance
+            ,serial_number
+            ,mail_address
             ,created_by
             ,created_date
             ,updated_by
             ,updated_date
         FROM
-            bank_account
+            user_information
         WHERE
             user_id = #{userId}
     </select>

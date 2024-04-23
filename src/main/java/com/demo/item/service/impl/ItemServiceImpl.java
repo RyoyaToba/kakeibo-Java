@@ -37,7 +37,7 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemUI> convertItemToItemUI(List<Item> items, List<Category> categories){
         return items.stream().map(item -> {
             ItemUI itemUI = new ItemUI();
-            itemUI.setId(item.getId());
+            itemUI.setItemId(item.getItemId());
             itemUI.setName(item.getName());
             itemUI.setPrice(item.getPrice());
             itemUI.setCategory(item.convertCategoryIdToCategory(categories));
@@ -57,8 +57,8 @@ public class ItemServiceImpl implements ItemService {
 
     /** itemを削除する */
     @Override
-    public void deleteItem(Integer id) {
-        itemMapper.deleteItem(id);
+    public void deleteItem(Integer id, String userId) {
+        itemMapper.deleteItem(id, userId);
     }
 
 }

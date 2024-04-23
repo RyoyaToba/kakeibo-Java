@@ -1,7 +1,7 @@
 package com.demo.withdrawal.service.impl;
 
 import com.demo.item.entity.Item;
-import com.demo.payment.entity.Account;
+import com.demo.payment.entity.BankAccount;
 import com.demo.payment.service.PaymentService;
 import com.demo.withdrawal.Model.Withdrawal;
 import com.demo.withdrawal.service.WithdrawalService;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,16 +37,16 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 
     /**  引き落としごとに計算された合計金額から、引き落としオブジェクトに変換する*/
     @Override
-    public List<Withdrawal> createWithdrawal(Map<Integer, Integer> map) {
+    public List<Withdrawal> createWithdrawal(Map<Integer, Integer> map, String userId) {
         // 登録している銀行口座を全件取得する
-        List<Account> accounts = paymentService.selectAll();
+        List<BankAccount> accounts = paymentService.loadByUserId(userId);
         // 引き落としのオブジェクトを作成して返す
         return map.entrySet().stream()
                 .map(entry -> {
                     Withdrawal withdrawal = new Withdrawal();
                     String accountName = accounts.stream()
-                            .filter(account -> account.getId().equals(entry.getKey()))
-                            .map(Account::getName)
+                            .filter(account -> account.getAccountId().equals(entry.getKey()))
+                            .map(BankAccount::getName)
                             .findFirst()
                             .orElse(null);
 
