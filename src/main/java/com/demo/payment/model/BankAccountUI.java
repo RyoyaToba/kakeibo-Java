@@ -1,10 +1,8 @@
 package com.demo.payment.model;
 
-import java.util.Date;
-
-public class AccountUI {
+public class BankAccountUI {
     /** 口座ID */
-    private Integer id;
+    private Integer accountId;
     /** 口座名称 */
     private String accountName;
     /** 口座タイプ名称*/
@@ -12,12 +10,12 @@ public class AccountUI {
     /** 残高 */
     private Integer balance;
 
-    public Integer getId() {
-        return id;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     public String getAccountName() {

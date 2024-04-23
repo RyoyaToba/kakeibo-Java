@@ -1,14 +1,18 @@
-package com.demo.category.entity;
+package com.demo.payment.entity;
 
 import java.util.Date;
 
-public class Category {
-    /** userId */
+public class BankAccount {
+    /** ユーザID */
     private String userId;
-    /** categoryId */
-    private Integer categoryId;
-    /** カテゴリー名 */
+    /** 口座ID */
+    private Integer accountId;
+    /** 口座タイプ */
+    private Integer type;
+    /** 口座名称 */
     private String name;
+    /** 残高 */
+    private Integer balance;
     /** 作成者 */
     private String createdBy;
     /** 作成日 */
@@ -26,12 +30,20 @@ public class Category {
         this.userId = userId;
     }
 
-    public Integer getId() {
-        return categoryId;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -40,6 +52,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
     }
 
     public String getCreatedBy() {
@@ -73,4 +93,5 @@ public class Category {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
+
 }

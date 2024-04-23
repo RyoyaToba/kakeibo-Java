@@ -3,7 +3,7 @@ package com.demo.item.model;
 public class ItemUI {
 
     /** id */
-    private Integer id;
+    private Integer itemId;
     /** 名称 */
     private String name;
     /** 価格 */
@@ -11,12 +11,12 @@ public class ItemUI {
     /** カテゴリ */
     private String category;
 
-    public Integer getId() {
-        return id;
+    public Integer getItemId() {
+        return itemId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
     }
 
     public String getName() {

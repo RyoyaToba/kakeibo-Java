@@ -1,10 +1,10 @@
 package com.demo.setting.controller;
 
-import com.demo.master.entity.AccountTypeMaster;
-import com.demo.payment.entity.Account;
-import com.demo.payment.model.AccountUI;
+import com.demo.payment.entity.BankAccount;
+import com.demo.payment.model.BankAccountUI;
 import com.demo.payment.service.PaymentService;
 import com.demo.setting.form.AccountForm;
+import com.demo.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -29,12 +30,14 @@ public class SettingController {
     }
 
     @RequestMapping("")
-    public String settingPage(Model model) {
+    public String settingPage(Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
 
         // 登録済み口座を全件取得
-        List<Account> accounts = paymentService.selectAll();
+        List<BankAccount> accounts = paymentService.loadByUserId(user.getUserId());
         // UIベースに変換
-        List<AccountUI> accountUIs = paymentService.convertAccountToAccountUI(accounts);
+        List<BankAccountUI> accountUIs = paymentService.convertAccountToAccountUI(accounts);
 
         model.addAttribute("accounts", accountUIs);
 
@@ -46,16 +49,21 @@ public class SettingController {
             @Validated AccountForm accountForm
             , BindingResult result
             , Model model
+            , HttpSession session
+
     ) {
 
         if (result.hasErrors()) {
-            return settingPage(model);
+            return settingPage(model, session);
         }
+
+        User user = (User) session.getAttribute("user");
 
         Integer typeInt = Integer.parseInt(accountForm.getType());
         Integer balanceInt = Integer.parseInt(accountForm.getBalance());
 
-        Account account = new Account();
+        BankAccount account = new BankAccount();
+        account.setUserId(user.getUserId());
         account.setName(accountForm.getName());
         account.setType(typeInt);
         account.setBalance(balanceInt);

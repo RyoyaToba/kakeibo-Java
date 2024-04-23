@@ -6,7 +6,8 @@
     <insert id="insertItem" parameterType="com.demo.item.entity.Item">
         <!-- テーブルにデータを挿入するSQL文 -->
         INSERT INTO Item (
-            name
+            user_id
+            ,name
             ,price
             ,target_date
             ,category_id
@@ -16,7 +17,8 @@
             ,updated_by
             ,updated_date
         ) VALUES (
-            #{name}
+            #{userId}
+            ,#{name}
             ,#{price}
             ,#{targetDate}
             ,#{categoryId}
@@ -31,7 +33,8 @@
     <!--対象月のItem登録済データを取得-->
     <select id="retrieveItemInTargetMonth" resultType="com.demo.item.entity.Item">
         SELECT
-            id
+            user_id
+            ,item_id
             ,name
             ,price
             ,target_date
@@ -51,7 +54,9 @@
     <!--Itemをidで削除する-->
     <delete id="deleteItem">
         DELETE FROM item
-        WHERE id = #{id}
+        WHERE
+            user_id = #{userId}
+            AND item_id = #{itemId}
     </delete>
 
 </mapper>

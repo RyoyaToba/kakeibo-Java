@@ -22,6 +22,6 @@ public interface ItemService {
     /** カテゴリー毎に金額を集計する */
     Map<Integer, Integer> totalAmountPerCategory(List<Item> items);
 
-    void deleteItem(Integer id);
+    void deleteItem(Integer itemId, String userId);
 
 }

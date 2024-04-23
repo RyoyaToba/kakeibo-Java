@@ -1,16 +1,16 @@
 package com.demo.payment.service;
 
-import com.demo.payment.entity.Account;
-import com.demo.payment.model.AccountUI;
+import com.demo.payment.entity.BankAccount;
+import com.demo.payment.model.BankAccountUI;
 
 import java.util.List;
 
 public interface PaymentService {
     /** 口座登録 */
-    void insert(Account account);
+    void insert(BankAccount account);
     /** 口座全件取得 */
-    List<Account> selectAll();
+    List<BankAccount> loadByUserId(String userId);
     /** UIベースに変換 */
-    List<AccountUI> convertAccountToAccountUI(List<Account> accounts);
+    List<BankAccountUI> convertAccountToAccountUI(List<BankAccount> accounts);
 
 }

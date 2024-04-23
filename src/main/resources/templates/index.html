@@ -78,7 +78,7 @@
     <tbody>
             <tr th:each="item : ${items}">
                 <form th:action="@{/home/delete}" method="post">
-                    <input type="hidden" th:value="${item.id}" name="id"/>
+                    <input type="hidden" th:value="${item.itemId}" name="itemId"/>
                     <td th:text="${item.name}" class="name">行1, 列1</td>
                     <td th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}" class="price">行1, 列2</td>
                     <td th:text="${item.category}" class="category">行1, 列3</td>

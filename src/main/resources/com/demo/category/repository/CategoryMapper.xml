@@ -7,7 +7,8 @@
     <!--カテゴリを全件取得する-->
     <select id="selectAll" resultType="com.demo.category.entity.Category">
         SELECT
-            id
+            user_id
+            ,category_id
             ,name
             ,created_by
             ,created_date
@@ -20,10 +21,11 @@
     <!--カテゴリを新規作成する-->
     <insert id="insert" parameterType="com.demo.category.entity.Category">
         INSERT INTO category
-        (name, created_by, created_date, updated_by, updated_date)
+        (user_id, name, created_by, created_date, updated_by, updated_date)
         VALUES
         (
-        #{name}
+        #{userId}
+        ,#{name}
         ,#{createdBy}
         ,#{createdDate}
         ,#{updatedBy}
@@ -33,8 +35,9 @@
 
     <delete id="delete">
         DELETE FROM category
-        WHERE id = #{id}
-
+        WHERE
+            user_id = #{userId}　
+            AND category_id = #{categoryId}
     </delete>
 
 </mapper>
