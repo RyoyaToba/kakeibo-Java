@@ -73,7 +73,27 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency> -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.11</version> <!-- 使用したいLogbackのバージョンに置き換えてください -->
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version> <!-- 使用しているSLF4Jのバージョンに置き換えてください -->
+			<exclusions>
+				<!-- 他のSLF4Jのバインディングを除外 -->
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<!-- もしあれば、他のSLF4Jのバインディングをここに追加 -->
+			</exclusions>
+		</dependency>
+
 	</dependencies>
+
 
 	<build>
 		<plugins>

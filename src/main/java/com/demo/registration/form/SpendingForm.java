@@ -58,4 +58,15 @@ public class SpendingForm {
     public void setBankSelectId(Integer bankSelectId) {
         this.bankSelectId = bankSelectId;
     }
+
+    @Override
+    public String toString() {
+        return "SpendingForm{" +
+                "name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", categoryId=" + categoryId +
+                ", targetDate='" + targetDate + '\'' +
+                ", bankSelectId=" + bankSelectId +
+                '}';
+    }
 }

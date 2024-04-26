@@ -20,5 +20,5 @@ let calcTotalPrice = () => {
 /** 画面ロード時に呼び出す */
 window.addEventListener('load', function() {
     calcTotalPrice();
-    onTargetMonthChange();
+    //onTargetMonthChange();
 })

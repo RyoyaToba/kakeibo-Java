@@ -73,5 +73,39 @@
 </div>
 <!--登録部分終了-->
 
+<div class="container bg-light text-emphasis-light">
+    <div class="title-section mt-3">
+        <h4 id="registrationSomeItem-title">前月と同じ項目をまとめて登録する</h4>
+    </div>
+
+    <!--年月選択-->
+    <div id="date">
+        <form th:action="@{/registration/targetMonthData}">
+            <select id="targetMonth" name="targetMonth" class="form-control">
+                <option th:each="month : ${targetDateListInDbs}"
+                        th:text="${month}"
+                        th:value="${month}">
+                </option>
+            </select>
+            <div class="text-center mb-3">
+                <button type="submit" id="month-select" class="btn btn-primary">データを取得</button>
+            </div>
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th th:if="${session.targetMonth == null}">対象月なし</th>
+            <th th:unless="${session.targetMonth == null}" th:text="${session.targetMonth}"></th>
+            <th>名称</th>
+            <th>金額</th>
+        </tr>
+        <tr th:if="${session.items != null}" th:each="item : ${session.items}">
+            <td th:text="${item.name}" th:colspan="2"></td>
+            <td th:text="${item.price}"></td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>

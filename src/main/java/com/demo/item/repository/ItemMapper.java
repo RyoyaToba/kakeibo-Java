@@ -18,4 +18,10 @@ public interface ItemMapper {
     /** 削除 */
     void deleteItem(Integer itemId, String userId);
 
+    /** Itemの金額を更新する */
+    void updateItem(String userId, Integer itemId, Integer price, Date now);
+
+    /** 登録済みItemの日付を全件取得する */
+    List<Item> retrieveItemAll(String userId);
+
 }

@@ -4,6 +4,7 @@ import com.demo.common.service.CommonService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
 @Service
@@ -31,6 +32,22 @@ public class CommonServiceImpl implements CommonService {
             throw new IllegalArgumentException("無効な日付形式");
         }
 
+    }
+
+    @Override
+    public LocalDate convertStringToEndLocalDate(String targetMonth) {
+        // yyyy/mm形式の文字列を分割して年と月を取得
+        String[] parts = targetMonth.split("/");
+        int year = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+
+        // YearMonthオブジェクトを作成して指定された年月の末日を取得
+        YearMonth yearMonthObj = YearMonth.of(year, month);
+        int lastDayOfMonth = yearMonthObj.lengthOfMonth();
+
+        // LocalDateオブジェクトを作成して末日を返す
+        LocalDate endOfMonth = LocalDate.of(year, month, lastDayOfMonth);
+        return endOfMonth;
     }
 
     // 文字列が指定されたフォーマットに従っているかを確認するメソッド

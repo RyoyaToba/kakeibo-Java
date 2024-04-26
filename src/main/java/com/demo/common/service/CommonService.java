@@ -7,5 +7,7 @@ public interface CommonService {
 
     LocalDate convertStringToFirstLocalDate(String targetMonth);
 
+    LocalDate convertStringToEndLocalDate(String targetMonth);
+
 
 }

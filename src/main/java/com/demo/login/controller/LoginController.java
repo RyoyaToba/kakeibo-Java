@@ -41,8 +41,6 @@ public class LoginController {
     @RequestMapping("/check")
     public String loginCheck(String userId, String password, HttpSession session, Model model) {
 
-        System.out.println(userId + " " + password);
-
         LoginInformation loginInfo = loginService.loadByUserId(userId);
 
         if (loginInfo == null) {

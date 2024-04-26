@@ -1,5 +1,6 @@
 package com.demo.common.utils;
 
+import javax.swing.text.DateFormatter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -54,6 +55,15 @@ public class DateUtils {
         // LocalDate → String
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         return date.format(dateTimeFormatter).substring(0,7); // MMまでを取得
+    }
+
+    /** Dateで渡された日付をYYYY/MM形式のStringで返す */
+    public static String dateToString(Date date) {
+        // 日付のフォーマットを定義
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM");
+        // 日付を指定された形式でフォーマットして文字列に変換
+        String formattedDate = sdf.format(date);
+        return formattedDate;
     }
 
 }

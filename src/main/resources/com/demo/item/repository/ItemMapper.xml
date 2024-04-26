@@ -59,4 +59,33 @@
             AND item_id = #{itemId}
     </delete>
 
+    <update id="updateItem">
+        UPDATE item SET
+            price = #{price}
+            ,updated_by = #{userId}
+            ,updated_date = #{now}
+        WHERE
+            user_id = #{userId}
+        AND item_id = #{itemId}
+    </update>
+
+    <select id="retrieveItemAll" resultType="com.demo.item.entity.Item">
+        SELECT
+            user_id
+            ,item_id
+            ,name
+            ,price
+            ,target_date
+            ,category_id
+            ,bank_select_id
+            ,created_by
+            ,created_date
+            ,updated_by
+            ,updated_date
+        FROM
+            item
+        WHERE
+            user_id = #{userId}
+    </select>
+
 </mapper>

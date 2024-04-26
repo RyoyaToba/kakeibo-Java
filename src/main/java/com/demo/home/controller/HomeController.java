@@ -12,19 +12,26 @@ import com.demo.item.service.ItemService;
 import com.demo.user.entity.User;
 import com.demo.withdrawal.Model.Withdrawal;
 import com.demo.withdrawal.service.WithdrawalService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/home")
 public class HomeController {
+
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
     private ItemService itemService;
@@ -54,6 +61,8 @@ public class HomeController {
     public String index(String targetMonth, Model model) {
 
         User user = (User) session.getAttribute("user");
+
+        logger.info("aaa");
 
         LocalDate targetDate = null;
 
@@ -107,6 +116,26 @@ public class HomeController {
         User user = (User) session.getAttribute("user");
         itemService.deleteItem(itemId, user.getUserId());
         return "redirect:/home";
+    }
+
+
+    /***
+     * 表内の金額を編集する
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateCellValue")
+    public String updateCellValue(@RequestBody Map<String, Object> request) {
+
+        User user = (User) session.getAttribute("user");
+
+        String userId = user.getUserId();
+        Integer itemId = Integer.parseInt((String) request.get("itemId"));
+        Integer newValue = Integer.parseInt((String) request.get("newValue"));
+
+        itemService.updateItem(userId, itemId, newValue, new Date());
+
+        return "index";
     }
 
 }

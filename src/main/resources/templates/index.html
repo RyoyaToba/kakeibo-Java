@@ -80,8 +80,8 @@
                 <form th:action="@{/home/delete}" method="post">
                     <input type="hidden" th:value="${item.itemId}" name="itemId"/>
                     <td th:text="${item.name}" class="name">行1, 列1</td>
-                    <td th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}" class="price">行1, 列2</td>
-                    <td th:text="${item.category}" class="category">行1, 列3</td>
+                    <td th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}" class="price editable" name="price">行1, 列2</td>
+                    <td th:text="${item.category}" class="category" name="category">行1, 列3</td>
                     <td><button class="btn btn-danger btn-sm">削除</button></td>
                 </form>
             </tr>
@@ -93,6 +93,7 @@
     <h5>copyLight Toba</h5>
 </footer>-->
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/js/common.js}"></script>
 <script th:src="@{/js/script.js}"></script>
 <script th:src="@{/js/searchCount.js}"></script>

@@ -61,4 +61,15 @@ public class ItemServiceImpl implements ItemService {
         itemMapper.deleteItem(id, userId);
     }
 
+    /** itemの金額を編集する */
+    @Override
+    public void updateItem(String userId, Integer itemId, Integer price, Date now) {
+        itemMapper.updateItem(userId, itemId, price, now);
+    }
+
+    @Override
+    public List<Item> retrieveItemAll(String userId) {
+        return itemMapper.retrieveItemAll(userId);
+    }
+
 }
