@@ -33,6 +33,10 @@ public interface ItemService {
     /** 登録済みのItemの日付を全件取得する */
     List<Item> retrieveItemAll(String userId);
 
+    /** まとめて入力されたItemSummarizeをItemに詰め替える */
     List<Item> convertItemSummarizeToItem(List<ItemSummarize> itemSummarizes);
+
+    /** 合計金額を月毎で集計する */
+    Map<String, Integer> calculateMonthlyTotal(List<Item> items);
 
 }

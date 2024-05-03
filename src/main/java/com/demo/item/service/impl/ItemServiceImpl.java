@@ -10,14 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Transactional()
 @Service
 public class ItemServiceImpl implements ItemService {
+
     @Autowired
     public ItemMapper itemMapper;
 
@@ -79,7 +82,7 @@ public class ItemServiceImpl implements ItemService {
         return itemMapper.retrieveItemAll(userId);
     }
 
-    /**  */
+    /** まとめて作成したItemModelからItemModelへ詰め替える */
     @Override
     public List<Item> convertItemSummarizeToItem(List<ItemSummarize> itemSummarizes) {
         return itemSummarizes.stream().map(itemSummarize -> {
@@ -97,4 +100,15 @@ public class ItemServiceImpl implements ItemService {
         }).collect(Collectors.toList());
     }
 
+    @Override
+    /** 合計金額を月毎でまとめる */
+    public Map<String, Integer> calculateMonthlyTotal(List<Item> items) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM");
+        return items.stream()
+                .collect(Collectors.groupingBy(
+                        item -> dateFormat.format(item.getTargetDate()),
+                        TreeMap::new,
+                        Collectors.summingInt(Item::getPrice)
+                ));
+    }
 }

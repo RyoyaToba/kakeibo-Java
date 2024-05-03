@@ -7,6 +7,7 @@ import com.demo.category.service.CategoryService;
 import com.demo.common.service.CommonService;
 import com.demo.item.service.ItemService;
 import com.demo.common.utils.DateUtils;
+import com.demo.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +33,9 @@ public class ItemDataController {
 
     @Autowired
     private CommonService commonService;
+
+    @Autowired
+    private HttpSession session;
 
     @RequestMapping("/retrieve")
     public List<ItemUI> retrieveItem(@RequestBody Map<String, String> requestBody) {
@@ -53,12 +58,23 @@ public class ItemDataController {
         return itemService.convertItemToItemUI(itemsInTargetMonth, categories);
     }
 
-    @RequestMapping("/sumPrice")
-    @ResponseBody
-    public List<Map<String, Integer>> retrieveSumPrice() {
 
-        
-        return new ArrayList<>();
+    /**
+     * 月別合計金額を返す
+     * @return 月別合計金額
+     */
+    @ResponseBody
+    @RequestMapping("/sumPrice")
+    public Map<String, Integer> retrieveSumPrice() {
+        User user = (User) session.getAttribute("user");
+
+        // 対象ユーザのItemを全件取得
+        List<Item> items = itemService.retrieveItemAll(user.getUserId());
+
+        // 合計金額を月毎で集計する
+        Map<String, Integer> map = itemService.calculateMonthlyTotal(items);
+
+        return map;
     }
 
 }
