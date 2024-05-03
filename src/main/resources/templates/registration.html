@@ -73,9 +73,10 @@
 </div>
 <!--登録部分終了-->
 
+<!-- まとめて登録セクション -->
 <div class="container bg-light text-emphasis-light">
     <div class="title-section mt-3">
-        <h4 id="registrationSomeItem-title">前月と同じ項目をまとめて登録する</h4>
+        <h4 id="registrationSomeItem-title">まとめて登録する</h4>
     </div>
 
     <!--年月選択-->
@@ -94,16 +95,33 @@
     </div>
 
     <table>
-        <tr>
-            <th th:if="${session.targetMonth == null}">対象月なし</th>
-            <th th:unless="${session.targetMonth == null}" th:text="${session.targetMonth}"></th>
-            <th>名称</th>
-            <th>金額</th>
-        </tr>
-        <tr th:if="${session.items != null}" th:each="item : ${session.items}">
-            <td th:text="${item.name}" th:colspan="2"></td>
-            <td th:text="${item.price}" class="editable"></td>
-        </tr>
+        <form th:action="@{/registration/spending-summarize}">
+            <tr>
+                <th th:if="${session.targetMonth == null}">対象月なし</th>
+                <th th:unless="${session.targetMonth == null}" th:text="${session.targetMonth}"></th>
+                <th>名称</th>
+                <th>金額</th>
+                <th>
+                    <select name="month" class="form-control">
+                        <option th:each="month : ${months}"
+                                th:text="${month}"
+                                th:value="${month}">
+                            yyyy/mm</option>
+                    </select>
+                    <button type="submit" id="item-submit-over" class="btn btn-primary">登 録</button>
+                </th>
+            </tr>
+            <tr th:if="${session.items != null}" th:each="item : ${session.items}">
+                <td th:text="${item.name}" th:colspan="2" name="name" th:value="${item.name}"></td>
+                <!-- itemNameをhidden inputで渡す -->
+                <input type="hidden" name="name" th:value="${item.name}" />
+                <td th:text="${item.price}" ></td>
+                <!-- categoryIdをhidden inputで渡す -->
+                <input type="hidden" name="categoryId" th:value="${item.categoryId}" />
+                <input type="hidden" name="bankSelectId" th:value="${item.bankSelectId}" />
+                <td><input type="text" name="price" /></td>
+            </tr>
+        </form>
     </table>
 </div>
 

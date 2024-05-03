@@ -1,5 +1,6 @@
 package com.demo.item.service.impl;
 
+import com.demo.item.entity.ItemSummarize;
 import com.demo.item.model.ItemUI;
 import com.demo.category.entity.Category;
 import com.demo.item.entity.Item;
@@ -24,6 +25,12 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void insertItem(Item item) {
         itemMapper.insertItem(item);
+    }
+
+    /** 新規レコードをまとめて追加 */
+    @Override
+    public void multiInsertItems(List<Item> items) {
+        itemMapper.multiInsertItems(items);
     }
 
     /** 対象月内の入力済み情報を取得 */
@@ -70,6 +77,24 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> retrieveItemAll(String userId) {
         return itemMapper.retrieveItemAll(userId);
+    }
+
+    /**  */
+    @Override
+    public List<Item> convertItemSummarizeToItem(List<ItemSummarize> itemSummarizes) {
+        return itemSummarizes.stream().map(itemSummarize -> {
+            Item item = new Item();
+            item.setUserId(itemSummarize.getUserId());
+            item.setName(itemSummarize.getName());
+            item.setPrice(itemSummarize.getPrice());
+            item.setCategoryId(itemSummarize.getCategoryId());
+            item.setBankSelectId(itemSummarize.getBankSelectId());
+            item.setCreatedBy(itemSummarize.getUserId());
+            item.setCreatedDate(new Date());
+            item.setUpdatedBy(itemSummarize.getUserId());
+            item.setUpdatedDate(new Date());
+            return item;
+        }).collect(Collectors.toList());
     }
 
 }

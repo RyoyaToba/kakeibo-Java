@@ -10,9 +10,13 @@ import com.demo.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +51,14 @@ public class ItemDataController {
                 DateUtils.convertLocalDateToDate(endDate));
         // UI表示形式に変換する
         return itemService.convertItemToItemUI(itemsInTargetMonth, categories);
+    }
+
+    @RequestMapping("/sumPrice")
+    @ResponseBody
+    public List<Map<String, Integer>> retrieveSumPrice() {
+
+        
+        return new ArrayList<>();
     }
 
 }

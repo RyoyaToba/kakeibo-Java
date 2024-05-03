@@ -3,9 +3,11 @@ package com.demo.registration.controller;
 import com.demo.category.entity.Category;
 import com.demo.category.service.CategoryService;
 import com.demo.common.service.CommonService;
+import com.demo.common.utils.CommonUtils;
 import com.demo.common.utils.DateUtils;
 import com.demo.common.utils.ItemUtils;
 import com.demo.item.entity.Item;
+import com.demo.item.entity.ItemSummarize;
 import com.demo.registration.form.SpendingForm;
 import com.demo.item.service.ItemService;
 import com.demo.payment.entity.BankAccount;
@@ -19,11 +21,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/registration")
@@ -78,6 +81,9 @@ public class registrationController {
 
         model.addAttribute("targetDateListInDbs", targetDateListInDbs);
 
+        // 年月選択用プルダウン
+        model.addAttribute("months", CommonUtils.retrieveMonths());
+
         return "registration";
     }
 
@@ -127,6 +133,46 @@ public class registrationController {
     }
 
 
+    @RequestMapping("/spending-summarize")
+    public String spendingSummarize(String month, HttpServletRequest request) {
 
+        User user = (User) session.getAttribute("user");
+
+        String[] itemNames = request.getParameterValues("name");
+        String[] itemPrices = request.getParameterValues("price");
+        String[] categoryIds = request.getParameterValues("categoryId");
+        String[] bankSelectIds = request.getParameterValues("bankSelectId");
+
+        // まとめて入力されてきた要素をオブジェクトにまとめる。金額が入力されなかった要素は除く。
+        List<ItemSummarize> itemSummarizes = IntStream.range(0, itemNames.length)
+                .mapToObj(i -> {
+                    // 空欄の場合はダミーの-1に置き換える
+                    String priceStr = itemPrices[i].isEmpty() ? "-1" : itemPrices[i];
+                    return new ItemSummarize(
+                            user.getUserId()
+                            ,itemNames[i]
+                            ,Integer.parseInt(priceStr)
+                            ,Integer.parseInt(categoryIds[i])
+                            ,Integer.parseInt(bankSelectIds[i]));
+                })
+                .filter(item -> item.getPrice() != -1) // priceが-1でないものをフィルタリング
+                .toList();
+
+        // 対象月の月初
+        Date targetDate = DateUtils.convertLocalDateToDate(
+                commonService.convertStringToFirstLocalDate(month)
+        );
+
+        List<Item> items = itemService.convertItemSummarizeToItem(itemSummarizes).stream()
+                .peek(e -> e.setTargetDate(targetDate)).toList();
+
+        System.out.println("month " + month);
+
+        itemSummarizes.stream().forEach(System.out::println);
+
+        itemService.multiInsertItems(items);
+
+        return "redirect:/registration";
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.demo.item.service;
 
+import com.demo.item.entity.ItemSummarize;
 import com.demo.item.model.ItemUI;
 import com.demo.category.entity.Category;
 import com.demo.item.entity.Item;
@@ -13,6 +14,8 @@ public interface ItemService {
 
     /** ItemのINSERT */
     void insertItem(Item item);
+
+    void multiInsertItems(List<Item> items);
 
     /** 月内のItem情報を取得 */
     List<Item> retrieveItemInTargetMonth(Date startDate, Date endDate);
@@ -29,5 +32,7 @@ public interface ItemService {
 
     /** 登録済みのItemの日付を全件取得する */
     List<Item> retrieveItemAll(String userId);
+
+    List<Item> convertItemSummarizeToItem(List<ItemSummarize> itemSummarizes);
 
 }

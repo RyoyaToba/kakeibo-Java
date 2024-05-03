@@ -12,6 +12,9 @@ public interface ItemMapper {
     /** 登録 */
     void insertItem(Item item);
 
+    /** 複数をまとめて登録 */
+    void multiInsertItems(List<Item> items);
+
     /** 対象月内の入力情報を取得 */
     List<Item> retrieveItemInTargetMonth(Date startDate, Date endDate);
 

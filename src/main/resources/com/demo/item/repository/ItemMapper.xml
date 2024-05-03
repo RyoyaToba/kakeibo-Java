@@ -88,4 +88,31 @@
             user_id = #{userId}
     </select>
 
+    <insert id="multiInsertItems">
+        INSERT INTO Item (
+        user_id
+        ,name
+        ,price
+        ,target_date
+        ,category_id
+        ,bank_select_id
+        ,created_by
+        ,created_date
+        ,updated_by
+        ,updated_date
+        ) VALUES
+
+        <foreach collection="items" item="item" separator=",">
+            (#{item.userId}
+            ,#{item.name}
+            ,#{item.price}
+            ,#{item.targetDate}
+            ,#{item.categoryId}
+            ,#{item.bankSelectId}
+            ,#{item.createdBy}
+            ,#{item.createdDate}
+            ,#{item.updatedBy}
+            ,#{item.updatedDate})
+        </foreach>
+    </insert>
 </mapper>
