@@ -1,10 +1,10 @@
-package com.demo.withdrawal.service.impl;
+package com.demo.setting.service.impl;
 
 import com.demo.item.entity.Item;
 import com.demo.payment.entity.BankAccount;
 import com.demo.payment.service.PaymentService;
-import com.demo.withdrawal.Model.Withdrawal;
-import com.demo.withdrawal.service.WithdrawalService;
+import com.demo.setting.model.Withdrawal;
+import com.demo.setting.service.WithdrawalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

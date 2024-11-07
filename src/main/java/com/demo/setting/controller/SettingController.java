@@ -1,9 +1,11 @@
 package com.demo.setting.controller;
 
+import com.demo.common.utils.CommonUtils;
 import com.demo.payment.entity.BankAccount;
 import com.demo.payment.model.BankAccountUI;
 import com.demo.payment.service.PaymentService;
 import com.demo.setting.form.AccountForm;
+import com.demo.setting.form.BalanceMonthForm;
 import com.demo.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,9 @@ public class SettingController {
         return new AccountForm();
     }
 
+    @ModelAttribute
+    private BalanceMonthForm setBalanceMonthForm() { return new BalanceMonthForm();}
+
     @RequestMapping("")
     public String settingPage(Model model, HttpSession session) {
 
@@ -40,6 +45,9 @@ public class SettingController {
         List<BankAccountUI> accountUIs = paymentService.convertAccountToAccountUI(accounts);
 
         model.addAttribute("accounts", accountUIs);
+
+        // 年月選択用プルダウン
+        model.addAttribute("months", CommonUtils.retrieveMonths());
 
         return "setting";
     }

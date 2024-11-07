@@ -8,6 +8,7 @@
           rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/navigation.css">
@@ -18,9 +19,9 @@
 <div th:insert="navFrag::header"></div>
 <!--ヘッダー終了-->
 
-<div id="container" class="container grid">
+<div id="rate-section">
     <div class="row">
-        <!--タイトル開始-->
+        <!--利用料金-->
         <div id="title" class="col-6 bg-light-subtle text-emphasis-light">
             <div class="title-section mt-3">
                 <h4 id="subtitle">利用料金</h4>
@@ -48,9 +49,9 @@
             </div>
             <!--年月選択終了-->
         </div>
-        <!--タイトル終了-->
+        <!--利用料金終了-->
 
-        <!--引き落とし口座別金額表示-->
+        <!--口座表示-->
         <div id="withdrawal-sec" class="col-6 bg-light-subtle text-emphasis-light">
             <div class="title-section mt-3">
                 <h4 id="withdrawal-title">口 座</h4>
@@ -63,7 +64,7 @@
             </div>
         </div>
     </div>
-    <!--引き落とし口座別金額表示終了-->
+    <!--口座終了-->
 </div>
 
 <!--テーブル開始-->

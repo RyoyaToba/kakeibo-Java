@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,12 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentMapper.loadByUserId(userId);
     }
 
+    /** 特定ユーザの特定アカウントを取得 */
+    @Override
+    public BankAccount loadByUserIdAndAccountId(String userId, Integer accountId) {
+        return paymentMapper.loadByUserIdAndAccountId(userId, accountId);
+    }
+
     /** UIベースに変換 */
     public List<BankAccountUI> convertAccountToAccountUI(List<BankAccount> accounts) {
 
@@ -53,6 +60,17 @@ public class PaymentServiceImpl implements PaymentService {
                             return accountUI;
                        })
                         .collect(Collectors.toList());
+    }
+
+    /**
+     * 残高を更新する
+     * @param userId ユーザID
+     * @param accountId アカウントID
+     * @param balance 残高
+     */
+    @Override
+    public void updateBankAccount(String userId, Integer accountId, Integer balance, Date updatedDate) {
+        paymentMapper.updateBankAccount(userId, accountId, balance, updatedDate);
     }
 
 }

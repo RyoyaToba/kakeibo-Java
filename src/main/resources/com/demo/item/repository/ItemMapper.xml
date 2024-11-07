@@ -47,7 +47,8 @@
         FROM
             item
         WHERE
-        <![CDATA[#{startDate, jdbcType=DATE} <= target_date]]>
+            user_id = #{userId}
+        AND <![CDATA[#{startDate, jdbcType=DATE} <= target_date]]>
         AND <![CDATA[#{endDate, jdbcType=DATE} >= target_date]]>
     </select>
 

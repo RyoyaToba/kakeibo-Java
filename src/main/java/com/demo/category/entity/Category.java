@@ -1,7 +1,10 @@
 package com.demo.category.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Category {
     /** userId */
     private String userId;

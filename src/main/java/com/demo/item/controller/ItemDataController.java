@@ -40,6 +40,8 @@ public class ItemDataController {
     @RequestMapping("/retrieve")
     public List<ItemUI> retrieveItem(@RequestBody Map<String, String> requestBody) {
 
+        User user = (User) session.getAttribute("user");
+
         String selectedMonth = requestBody.get("selectedMonth");
         LocalDate targetDate = commonService.convertStringToFirstLocalDate(selectedMonth);
 
@@ -52,8 +54,9 @@ public class ItemDataController {
         LocalDate endDate = DateUtils.getEndOfMonth(targetDate);
         // 対象月内の登録データ取得
         List<Item> itemsInTargetMonth = itemService.retrieveItemInTargetMonth(
-                DateUtils.convertLocalDateToDate(startDate),
-                DateUtils.convertLocalDateToDate(endDate));
+                user.getUserId()
+                ,DateUtils.convertLocalDateToDate(startDate)
+                ,DateUtils.convertLocalDateToDate(endDate));
         // UI表示形式に変換する
         return itemService.convertItemToItemUI(itemsInTargetMonth, categories);
     }

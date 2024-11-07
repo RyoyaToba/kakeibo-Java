@@ -12,8 +12,7 @@
 <div th:fragment="header">
     <!--ヘッダー開始-->
     <header>
-        <h1>家計簿アプリ</h1>
-        <p th:text="'ようこそ、' + ${session.user.userId} + 'さん'"></p>
+        <h1 th:text="'ようこそ、' + ${session.user.userId} + 'さん'"></h1>
     </header>
     <!--ヘッダ終了-->
 

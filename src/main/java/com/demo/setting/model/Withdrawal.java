@@ -1,4 +1,4 @@
-package com.demo.withdrawal.Model;
+package com.demo.setting.model;
 
 public class Withdrawal {
     /** 口座名称 */

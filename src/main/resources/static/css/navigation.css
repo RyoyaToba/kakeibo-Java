@@ -1,25 +1,25 @@
 /* ナビゲーションバーに適用するCSSです */
 
 nav {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-        }
+background-color: #2ec4b6;
+ color: white;
+ padding: 10px;
+}
 
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: space-around; /* ナビゲーションバーの等分配置 */
-        }
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around; /* ナビゲーションバーの等分配置 */
+}
 
-        nav li {
+nav li {
 
-        }
+}
 
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}

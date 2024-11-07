@@ -4,7 +4,7 @@ table {
     width: 80%; /* 80%の横幅に指定 */
     margin: 20px auto; /* 上下に20pxずつのマージンを指定し、中央寄せ */
     background-color: #fff; /* 背景色を変更 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 影を追加 */
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 影を追加 */
     border-collapse: collapse;
 }
 

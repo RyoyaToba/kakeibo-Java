@@ -18,7 +18,7 @@ public interface ItemService {
     void multiInsertItems(List<Item> items);
 
     /** 月内のItem情報を取得 */
-    List<Item> retrieveItemInTargetMonth(Date startDate, Date endDate);
+    List<Item> retrieveItemInTargetMonth(String userId, Date startDate, Date endDate);
 
     /** テーブル格納情報をUI状態に変更 */
     List<ItemUI> convertItemToItemUI(List<Item> items, List<Category> categories);

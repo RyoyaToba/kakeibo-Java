@@ -1,5 +1,8 @@
 package com.demo.category.model;
 
+import lombok.Data;
+
+@Data
 public class CategoryUI {
 
     /** カテゴリId*/

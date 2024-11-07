@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-12 bg-light text-emphasis-light">
             <div class="title-section mt-3">
-                <h4>口 座</h4>
+                <h4>口座新規登録</h4>
             </div>
             <form class="row" th:action="@{/setting/account/registration}" method="post" th:object="${accountForm}">
 
@@ -63,7 +63,7 @@
 </div>
 <!--口座登録終了-->
 
-<!---->
+<!--口座一覧表示-->
     <table>
         <thead>
         <tr>
@@ -85,7 +85,58 @@
         </tr>
         </tbody>
     </table>
+<!--口座一覧表示終了-->
 
+<!--月次時点口座残高入力-->
+<div class="container">
+    <div class="row">
+        <div class="col-12 bg-light text-emphasis-light">
+            <div class="title-section mt-3">
+                <h4>月次残高入力</h4>
+            </div>
+            <form class="row" th:action="@{/balance-monthly/register-balance-monthly}" method="post" th:object="${balanceMonthForm}">
+
+                <!--口座選択-->
+                <div class="col-md-4">
+                    <label for="accountId">口 座：</label>
+                    <select class="form-control" id="accountId" th:field="*{accountId}">
+                        <option th:each="account : ${accounts}"
+                            th:text="${account.accountName}"
+                            th:value="${account.accountId}">
+                        </option>
+
+                    </select>
+                </div>
+                <!--口座選択終了-->
+
+                <!--残高入力-->
+                <div class="col-md-4">
+                    <label for="balanceMonthly">残 高：</label>
+                    <input type="text" id="balanceMonthly" class="form-control" th:field="*{balanceMonthly}"/>
+                </div>
+                <!--残高入力終了-->
+
+                <!--基準年月選択-->
+                <div class="col-md-4">
+                    <label for="targetYm">月次選択：</label>
+                    <select class="form-control" id="targetYm" th:field="*{targetYm}">
+                        <option th:each="month : ${months}"
+                                th:text="${month}"
+                                th:value="${month}">yyyy/mm
+                        </option>
+                    </select>
+                </div>
+                <!--基準年月選択終了-->
+
+                <div class="text-center col-md-12 mt-3 mb-3">
+                    <button type="submit" class="btn btn-primary">登 録</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!--月次時点口座残高入力終了-->
 
 </body>
 </html>

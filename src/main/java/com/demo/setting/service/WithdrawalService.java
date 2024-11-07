@@ -1,7 +1,7 @@
-package com.demo.withdrawal.service;
+package com.demo.setting.service;
 
 import com.demo.item.entity.Item;
-import com.demo.withdrawal.Model.Withdrawal;
+import com.demo.setting.model.Withdrawal;
 
 import java.util.List;
 import java.util.Map;

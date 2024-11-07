@@ -1,20 +1,21 @@
-package com.demo.payment.entity;
+package com.demo.setting.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 
-@Setter
-@Getter
-public class BankAccount {
+@Data
+public class BankAccountMonthlyModel {
+
+    /** 基準年月 */
+    private String targetYm;
     /** ユーザID */
     private String userId;
-    /** 口座ID */
+    /** 銀行識別番号 */
     private Integer accountId;
-    /** 口座タイプ */
+    /** タイプ */
     private Integer type;
-    /** 口座名称 */
+    /** 口座名 */
     private String name;
     /** 残高 */
     private Integer balance;

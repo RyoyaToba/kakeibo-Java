@@ -8,25 +8,26 @@
           rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/navigation.css">
 </head>
 <body>
-<h2>Login</h2>
+<h2>家計簿</h2>
 
 <form th:action="@{/login/check}" method="post">
 
     <h3 th:if="${notUserMessage != null}" th:text="${notUserMessage}"></h3>
-    <div>
+    <div class="mb-3">
         <label for="userId">UserId:</label>
         <input type="text" id="userId" class="form-control" name="userId" />
     </div>
-    <div>
+    <div class="mb-3">
         <label for="password">Password:</label>
         <input type="password" id="password" class="form-control" name="password" />
     </div>
-    <button type="submit">login</button>
+    <button type="submit">ログイン</button>
 </form>
 <div>
     <a th:href="@{/user}">新規登録</a>

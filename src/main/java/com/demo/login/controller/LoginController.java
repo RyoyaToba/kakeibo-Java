@@ -11,8 +11,8 @@ import com.demo.login.entity.LoginInformation;
 import com.demo.login.service.LoginService;
 import com.demo.user.entity.User;
 import com.demo.user.service.UserService;
-import com.demo.withdrawal.Model.Withdrawal;
-import com.demo.withdrawal.service.WithdrawalService;
+import com.demo.setting.model.Withdrawal;
+import com.demo.setting.service.WithdrawalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +63,13 @@ public class LoginController {
 
         LoginInformation loginInfo = loginService.loadByUserId(userId);
 
-        if (loginInfo == null) {
+        if (userId.isEmpty() || password.isEmpty()){
+            String notUserMessage = "ユーザID、パスワードを入力してください";
+            model.addAttribute("notUserMessage", notUserMessage);
+            return "login";
+        }
+
+        if (!password.equals(loginInfo.getPassword())) {
             String notUserMessage = "入力されたユーザID、パスワードに誤りがあります";
             model.addAttribute("notUserMessage", notUserMessage);
             return "login";
@@ -89,6 +95,7 @@ public class LoginController {
         LocalDate endDate = DateUtils.getEndOfMonth(targetDate);
         // 対象月内の登録データ取得
         List<Item> itemsInTargetMonth = itemService.retrieveItemInTargetMonth(
+                userId,
                 DateUtils.convertLocalDateToDate(startDate),
                 DateUtils.convertLocalDateToDate(endDate));
         // UI表示形式に変換する

@@ -113,10 +113,17 @@ public class registrationController {
         return "redirect:/home";
     }
 
+    /**
+     * 対象月の変更
+     * @param targetMonth
+     * @param model
+     * @return
+     */
     @RequestMapping("/targetMonthData")
     public String targetMonthData(String targetMonth, Model model) {
 
-        System.out.println(targetMonth);
+        User user = (User) session.getAttribute("user");
+
         Date firstDate = DateUtils.convertLocalDateToDate(
                 commonService.convertStringToFirstLocalDate(targetMonth)
         );
@@ -124,7 +131,7 @@ public class registrationController {
                 commonService.convertStringToEndLocalDate(targetMonth)
         );
 
-        List<Item> items = itemService.retrieveItemInTargetMonth(firstDate, endDate);
+        List<Item> items = itemService.retrieveItemInTargetMonth(user.getUserId(), firstDate, endDate);
 
         session.setAttribute("targetMonth", targetMonth);
         session.setAttribute("items", items);
@@ -133,6 +140,12 @@ public class registrationController {
     }
 
 
+    /**
+     * 合計金額を月別で取得
+     * @param month
+     * @param request
+     * @return
+     */
     @RequestMapping("/spending-summarize")
     public String spendingSummarize(String month, HttpServletRequest request) {
 
@@ -165,8 +178,6 @@ public class registrationController {
 
         List<Item> items = itemService.convertItemSummarizeToItem(itemSummarizes).stream()
                 .peek(e -> e.setTargetDate(targetDate)).toList();
-
-        System.out.println("month " + month);
 
         itemSummarizes.stream().forEach(System.out::println);
 

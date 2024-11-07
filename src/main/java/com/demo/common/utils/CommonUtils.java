@@ -15,7 +15,7 @@ public class CommonUtils {
         // 現在の年月を取得
         YearMonth currentYearMonth = YearMonth.now();
         // 上限となる年月
-        YearMonth limitYearMonth = YearMonth.of(2022, 1);
+        YearMonth limitYearMonth = YearMonth.of(2024, 1);
         // 現在の年月から上限の年月までループ
         while (currentYearMonth.isAfter(limitYearMonth) || currentYearMonth.equals(limitYearMonth)) {
             // 年月を文字列にフォーマットしてリストに追加

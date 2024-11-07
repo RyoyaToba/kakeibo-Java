@@ -16,7 +16,7 @@ public interface ItemMapper {
     void multiInsertItems(List<Item> items);
 
     /** 対象月内の入力情報を取得 */
-    List<Item> retrieveItemInTargetMonth(Date startDate, Date endDate);
+    List<Item> retrieveItemInTargetMonth(String userId, Date startDate, Date endDate);
 
     /** 削除 */
     void deleteItem(Integer itemId, String userId);

@@ -10,8 +10,8 @@ import com.demo.registration.form.SpendingForm;
 import com.demo.category.service.CategoryService;
 import com.demo.item.service.ItemService;
 import com.demo.user.entity.User;
-import com.demo.withdrawal.Model.Withdrawal;
-import com.demo.withdrawal.service.WithdrawalService;
+import com.demo.setting.model.Withdrawal;
+import com.demo.setting.service.WithdrawalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,8 +80,10 @@ public class HomeController {
         LocalDate endDate = DateUtils.getEndOfMonth(targetDate);
         // 対象月内の登録データ取得
         List<Item> itemsInTargetMonth = itemService.retrieveItemInTargetMonth(
-                                            DateUtils.convertLocalDateToDate(startDate),
-                                            DateUtils.convertLocalDateToDate(endDate));
+                user.getUserId(),
+                DateUtils.convertLocalDateToDate(startDate),
+                DateUtils.convertLocalDateToDate(endDate));
+
         // UI表示形式に変換する
         List<ItemUI> itemUIs = itemService.convertItemToItemUI(itemsInTargetMonth, categories);
         // 年月選択用プルダウン
@@ -147,8 +149,6 @@ public class HomeController {
 
         User user = (User) session.getAttribute("user");
 
-        System.out.println(previousMonth);
-
         // 受け取った前月の文字列を処理する
         LocalDate previousMonthLD = commonService.convertStringToFirstLocalDate(previousMonthString);
 
@@ -159,6 +159,7 @@ public class HomeController {
 
         List<Item> items =
                 itemService.retrieveItemInTargetMonth(
+                        user.getUserId(),
                         DateUtils.convertLocalDateToDate(startDate)
                         , DateUtils.convertLocalDateToDate(endDate)
                 );

@@ -1,7 +1,10 @@
 package com.demo.category.model;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Category {
     /** ユーザID*/
     private String userId;

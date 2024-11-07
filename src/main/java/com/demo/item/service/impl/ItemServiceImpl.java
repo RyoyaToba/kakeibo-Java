@@ -38,8 +38,8 @@ public class ItemServiceImpl implements ItemService {
 
     /** 対象月内の入力済み情報を取得 */
     @Override
-    public List<Item> retrieveItemInTargetMonth(Date startDate, Date endDate) {
-        return itemMapper.retrieveItemInTargetMonth(startDate, endDate);
+    public List<Item> retrieveItemInTargetMonth(String userId, Date startDate, Date endDate) {
+        return itemMapper.retrieveItemInTargetMonth(userId, startDate, endDate);
     }
 
     /** ItemのテーブルデータをUI状態に置き換える */

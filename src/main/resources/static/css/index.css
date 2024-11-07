@@ -1,0 +1,6 @@
+/* ホームに使用するCSSです */
+
+#rate-section {
+    width: 80%;
+    margin: 20px auto 0 auto; /* 上に20pxの余白 */
+}
