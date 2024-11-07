@@ -16,6 +16,8 @@
 
 ## Environment Setup
 
+application.ymlはリポジトリにあげていませんので、resources配下にご自身の環境で作成ください。
+
 ## 各ページに関する情報
 
 
