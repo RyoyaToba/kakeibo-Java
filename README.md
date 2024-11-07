@@ -1,13 +1,11 @@
 ## Description
 
-This repository is for practicing creating applications using Java and Spring Boot. 
-It is intended for personal use only, and it will not be made public on a server. 
-If you wish to use it, please do so in a local environment.
-To be honest, I am quite busy with work, so I probably won't update it very often.
+このリポジトリは、Java と Spring Boot を使用したアプリケーションの作成を練習するためのリポジトリです。
+個人利用のみを目的としており、サーバー上に公開されることはありません。使用する場合はローカル環境で行ってください。
+仕事が忙しいのであまり更新しないかもしれません。
 
-home image
+ホーム画面イメージ
 ![スクリーンショット 2024-10-17 20 14 03](https://github.com/user-attachments/assets/7e9b494d-2f9c-4d51-b063-984efec4b7f4)
-
 
 ## Tools
 
@@ -18,6 +16,8 @@ home image
 
 ## Environment Setup
 
+application.ymlはリポジトリにあげていませんので、resources配下にご自身の環境で作成ください。
 
-## Directory Structure
+## 各ページに関する情報
+
 
