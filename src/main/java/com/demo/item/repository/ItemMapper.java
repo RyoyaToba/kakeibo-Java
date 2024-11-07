@@ -27,4 +27,7 @@ public interface ItemMapper {
     /** 登録済みItemの日付を全件取得する */
     List<Item> retrieveItemAll(String userId);
 
+    /** itemNameに該当するItemを全件取得 **/
+    List<Item> retrieveItemsByName(String userId, String itemName);
+
 }

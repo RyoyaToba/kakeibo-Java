@@ -1,4 +1,6 @@
 #lineChart {
-    /*width: 200px;
-    height: 100px;*/
+    width: 100%;
+    height: 400px; /* 画面サイズに応じて高さを調整 */
+    max-width: 100%; /* 幅を親要素に合わせて調整 */
+    max-height: 500px; /* 高さも最大値を設定 */
 }

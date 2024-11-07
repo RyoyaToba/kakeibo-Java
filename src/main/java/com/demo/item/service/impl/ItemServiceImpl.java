@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Transactional()
@@ -109,6 +106,27 @@ public class ItemServiceImpl implements ItemService {
                         item -> dateFormat.format(item.getTargetDate()),
                         TreeMap::new,
                         Collectors.summingInt(Item::getPrice)
+                ));
+    }
+
+    /**
+     * itemの月毎のMapを返す
+     * @param userId
+     * @param itemName
+     * @return
+     */
+    @Override
+    public Map<String, Integer> retrieveItemsByName(String userId, String itemName) {
+        List<Item> items = itemMapper.retrieveItemsByName(userId, itemName);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM");
+        return items.stream()
+                // 日付で昇順にソート
+                .sorted(Comparator.comparing(Item::getTargetDate))
+                .collect(Collectors.toMap(
+                        item -> dateFormat.format(item.getTargetDate()),  // キーとして日付をフォーマット
+                        Item::getPrice,                                   // 値として価格
+                        (existing, replacement) -> existing,              // キーが重複した場合に既存の値を保持
+                        LinkedHashMap::new                                // ソート順を保持するためにLinkedHashMapを使用
                 ));
     }
 }

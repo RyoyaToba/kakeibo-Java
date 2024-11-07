@@ -39,4 +39,7 @@ public interface ItemService {
     /** 合計金額を月毎で集計する */
     Map<String, Integer> calculateMonthlyTotal(List<Item> items);
 
+    /** Itemの金額を返す **/
+    Map<String, Integer> retrieveItemsByName(String userId, String itemName);
+
 }

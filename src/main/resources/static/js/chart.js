@@ -4,69 +4,64 @@ window.addEventListener('load', function() {
     retrieveSumPrice();
 })
 
-let createChart  = (data) => {
-    let lineCtx = document.getElementById("lineChart");
-        // 線グラフの設定
-        let lineConfig = {
-          type: 'line',
-          data: {
-            // ※labelとデータの関係は得にありません
-            labels: Object.keys(data),
-            datasets: [{
-              label: '合 計',
-              data: Object.values(data),
-              borderColor: '#f88',
-            }],
-          },
-          options: {
-            scales: {
-              // Y軸の最大値・最小値、目盛りの範囲などを設定する
-              y: {
-                suggestedMin: 0,
-                suggestedMax: 40000,
-                ticks: {
-                  stepSize: 5000
-                }
-              }
-            },
-          },
-          responsive: true, // グラフをレスポンシブにする
-          maintainAspectRatio: false, // アスペクト比を維持しない
-        };
-        let lineChart = new Chart(lineCtx, lineConfig);
-}
 
-let createChart2  = (data) => {
-    let barCtx = document.getElementById("barChart");
-        // 線グラフの設定
-        let barConfig = {
-          type: 'bar',
-          data: {
-            // ※labelとデータの関係は得にありません
+// selectElementを取得して変数に代入
+const selectElement = document.getElementById('item-name');
+
+selectElement.addEventListener('change', function() {
+
+    // 選択された option の値とテキストを取得
+    const selectedText = selectElement.options[selectElement.selectedIndex].text;
+
+    console.log("選択されたテキスト:", selectedText);
+
+    if (selectedText == "合計") {
+        retrieveSumPrice();
+    } else {
+        retrieveItemPrice(selectedText);
+    }
+})
+
+/* グラフの作成 */
+let lineChart = null;
+
+let createChart = (data) => {
+    let lineCtx = document.getElementById("lineChart");
+
+    // 既存のチャートインスタンスが存在する場合は破棄
+    if (lineChart) {
+        lineChart.destroy();
+    }
+
+    // 線グラフの設定
+    let lineConfig = {
+        type: 'line',
+        data: {
             labels: Object.keys(data),
             datasets: [{
-              label: '合 計',
-              data: Object.values(data),
-              borderColor: '#f88',
+                label: selectElement.options[selectElement.selectedIndex].text,
+                data: Object.values(data),
+                borderColor: '#f88',
             }],
-          },
-          options: {
+        },
+        options: {
             scales: {
-              // Y軸の最大値・最小値、目盛りの範囲などを設定する
-              y: {
-                suggestedMin: 0,
-                suggestedMax: 40000,
-                ticks: {
-                  stepSize: 5000
+                y: {
+                    suggestedMin: 5000,
+                    suggestedMax: 30000,
+                    ticks: {
+                        stepSize: 5000
+                    }
                 }
-              }
             },
-          },
-          responsive: true, // グラフをレスポンシブにする
-          maintainAspectRatio: false, // アスペクト比を維持しない
-        };
-        let barChart = new Chart(barCtx, barConfig);
-}
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+    };
+
+    // グローバル変数 lineChart に新しいチャートインスタンスを代入
+    lineChart = new Chart(lineCtx, lineConfig);
+};
 
 let retrieveSumPrice = () => {
     $.ajax({
@@ -77,7 +72,21 @@ let retrieveSumPrice = () => {
     }).done(function(data) {
         console.log(data);
         createChart(data);
-        createChart2(data);
+    }).fail(function() {
+        console.log('fail');
+    })
+}
+
+let retrieveItemPrice = (selectedText) => {
+    $.ajax({
+        url: "/itemPrices",
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({ selectedText: selectedText }), // データをJSON形式で送信
+    }).done(function(data) {
+        console.log(data);
+        createChart(data);
     }).fail(function() {
         console.log('fail');
     })

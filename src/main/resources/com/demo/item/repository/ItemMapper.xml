@@ -89,6 +89,28 @@
             user_id = #{userId}
     </select>
 
+
+    <select id="retrieveItemsByName" resultType="com.demo.item.entity.Item">
+        SELECT
+            user_id
+            ,item_id
+            ,name
+            ,price
+            ,target_date
+            ,category_id
+            ,bank_select_id
+            ,created_by
+            ,created_date
+            ,updated_by
+            ,updated_date
+        FROM
+            item
+        WHERE
+            user_id = #{userId}
+        AND
+            name = #{itemName}
+    </select>
+
     <insert id="multiInsertItems">
         INSERT INTO Item (
         user_id

@@ -75,9 +75,16 @@ public class ItemDataController {
         List<Item> items = itemService.retrieveItemAll(user.getUserId());
 
         // 合計金額を月毎で集計する
-        Map<String, Integer> map = itemService.calculateMonthlyTotal(items);
+        return itemService.calculateMonthlyTotal(items);
+    }
 
-        return map;
+    @ResponseBody
+    @RequestMapping("/itemPrices")
+    public Map<String, Integer> retrieveItemPrice(@RequestBody Map<String, String> request) {
+        User user = (User) session.getAttribute("user");
+        String selectedItemName = request.get("selectedText");
+
+        return itemService.retrieveItemsByName(user.getUserId(), selectedItemName);
     }
 
 }
