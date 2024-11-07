@@ -84,6 +84,8 @@ public class HomeController {
                 DateUtils.convertLocalDateToDate(startDate),
                 DateUtils.convertLocalDateToDate(endDate));
 
+        // 対象月のItemが存在するかどうかを判定するフラグ
+        model.addAttribute("existsItems", !itemsInTargetMonth.isEmpty());
         // UI表示形式に変換する
         List<ItemUI> itemUIs = itemService.convertItemToItemUI(itemsInTargetMonth, categories);
         // 年月選択用プルダウン

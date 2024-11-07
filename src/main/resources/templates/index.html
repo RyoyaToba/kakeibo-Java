@@ -68,7 +68,7 @@
 </div>
 
 <!--テーブル開始-->
-<table>
+<table th:if="${existsItems}">
     <thead>
         <tr>
             <th>名称</th>
@@ -78,15 +78,15 @@
         </tr>
     </thead>
     <tbody>
-            <tr th:each="item : ${items}">
-                <form th:action="@{/home/delete}" method="post">
-                    <input type="hidden" th:value="${item.itemId}" name="itemId"/>
-                    <td th:text="${item.name}" class="name">行1, 列1</td>
-                    <td th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}" class="price editable" name="price">行1, 列2</td>
-                    <td th:text="${item.category}" class="category" name="category">行1, 列3</td>
-                    <td><button class="btn btn-danger btn-sm">削除</button></td>
-                </form>
-            </tr>
+        <tr th:each="item : ${items}">
+            <form th:action="@{/home/delete}" method="post">
+                <input type="hidden" th:value="${item.itemId}" name="itemId"/>
+                <td th:text="${item.name}" class="name">行1, 列1</td>
+                <td th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}" class="price editable" name="price">行1, 列2</td>
+                <td th:text="${item.category}" class="category" name="category">行1, 列3</td>
+                <td><button class="btn btn-danger btn-sm">削除</button></td>
+            </form>
+        </tr>
     </tbody>
 </table>
 <!--テーブル終了-->
