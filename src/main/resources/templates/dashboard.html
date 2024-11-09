@@ -19,17 +19,35 @@
 <!--ヘッダ開始-->
 <div th:insert="navFrag::header"></div>
 <!--ヘッダー終了-->
+<div id="expenditure">
+    <h2>支 出</h2>
 
-<select id="item-name">
-    <option>合計</option>
-    <option>家賃</option>
-    <option>電気代</option>
-    <option>ガス代</option>
-    <option>楽天クレジット</option>
-</select>
+    <select id="item-name">
+        <option>合計</option>
+        <option>家賃</option>
+        <option>電気代</option>
+        <option>ガス代</option>
+        <option>水道代</option>
+        <option>J:COM</option>
+        <option>ENEOSクレジット</option>
+        <option>NHK</option>
+        <option>明治安田生命保険料</option>
+        <option>携帯料金</option>
+        <option>奨学金</option>
+        <option>楽天クレジット</option>
+    </select>
 
-<canvas id="lineChart"></canvas>
+    <canvas id="lineChart"></canvas>
+</div>
 
+<div id="savings">
+    <h2>貯 蓄</h2>
+    <select id="bank-name">
+        <option th:each="bank : ${banks}" th:text="${bank.name}" th:value="${bank.accountId}">
+    </select>
+
+    <canvas id="lineChart2"></canvas>
+</div>
 <!--<footer>
     <h5>copyLight Toba</h5>
 </footer>-->

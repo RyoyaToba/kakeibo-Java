@@ -1,5 +1,10 @@
 /* 設定画面用のCSSです */
 
+#bank-register {
+    width: 80%;
+    margin: 20px auto 0 auto; /* 上に20pxの余白 */
+}
+
 /* フォームのコンテナ */
 .form-container {
     width: 300px;

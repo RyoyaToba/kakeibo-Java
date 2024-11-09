@@ -17,8 +17,8 @@
 <div th:insert="navFrag::header"></div>
 <!--ヘッダ終了-->
 
-<!--口座登録-->
-<div class="container">
+<!--口座新規登録-->
+<div id="bank-register">
     <div class="row">
         <div class="col-12 bg-light text-emphasis-light">
             <div class="title-section mt-3">
@@ -34,21 +34,13 @@
                 </div>
                 <!--名称終了-->
 
-                <!--残高入力-->
-                <div class="col-md-6">
-                    <label for="balance">残高：</label>
-                    <span th:errors="*{balance}" style="color:red">残高の入力は必須です</span>
-                    <input type="text" value="" name="balance" id="balance" class="form-control" th:field="*{balance}"/>
-                </div>
-                <!--残高入力終了-->
-
                 <!--口座タイプ-->
                 <div class="col-md-12">
                     <label for="bank"></label>
-                    銀行：<input type="radio" value="1" name="type" id="bank" class="form-control" th:field="*{type}"/>
+                    銀行：<input type="radio" value="1" name="type" id="bank" th:field="*{type}"/>
 
                     <label for="security"></label>
-                    証券：<input type="radio" value="2" name="type" id="security" class="form-control" th:field="*{type}"/>
+                    証券：<input type="radio" value="2" name="type" id="security" th:field="*{type}"/>
                 </div>
                 <!--口座タイプ終了-->
 
@@ -61,7 +53,7 @@
         </div>
     </div>
 </div>
-<!--口座登録終了-->
+<!--口座新規登録終了-->
 
 <!--口座一覧表示-->
     <table>
@@ -69,7 +61,6 @@
         <tr>
             <th>口座名</th>
             <th>口座タイプ</th>
-            <th>残 高</th>
             <th>操 作</th>
         </tr>
         </thead>
@@ -79,7 +70,7 @@
                 <input type="hidden" th:value="${account.accountId}" name="id"/>
                 <td th:text="${account.accountName}" class="name">行1, 列1</td>
                 <td th:text="${account.accountTypeName}" class="typeName">行1, 列1</td>
-                <td th:text="${#numbers.formatInteger(account.balance, 0, 'COMMA')}" class="balance">行1, 列2</td>
+                <!--<td th:text="${#numbers.formatInteger(account.balance, 0, 'COMMA')}" class="balance">行1, 列2</td>-->
                 <td><button class="btn btn-danger btn-sm">削 除</button></td>
             </form>
         </tr>

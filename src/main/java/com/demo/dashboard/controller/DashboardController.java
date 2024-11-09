@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -27,14 +27,11 @@ public class DashboardController {
 
         User user = (User) session.getAttribute("user");
 
-        BankAccountMonthlyModel bam = bankAccountMonthlyService.selectByTargetYm("202410", user.getUserId(), 7);
+        List<BankAccountMonthlyModel> banks = bankAccountMonthlyService.retrieveBankName(user.getUserId());
 
-        System.out.println(bam);
+        model.addAttribute("banks", banks);
 
         return "dashboard";
     }
-
-
-
 
 }

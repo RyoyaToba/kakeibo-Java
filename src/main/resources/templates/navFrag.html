@@ -12,7 +12,10 @@
 <div th:fragment="header">
     <!--ヘッダー開始-->
     <header>
-        <h1 th:text="'ようこそ、' + ${session.user.userId} + 'さん'"></h1>
+        <h1 th:text="家計簿アプリ"></h1>
+        <ul>
+            <li><a th:href="@{/setting}">マイメニュー</a></li>
+        </ul>
     </header>
     <!--ヘッダ終了-->
 
@@ -22,7 +25,6 @@
             <li><a th:href="@{/home}">ホーム</a></li>
             <li><a th:href="@{/registration}">登録</a></li>
             <li><a th:href="@{/category}">カテゴリ</a></li>
-            <li><a th:href="@{/setting}">設定</a></li>
             <li><a th:href="@{/dashboard}">ダッシュボード</a></li>
             <li><a th:href="@{/logout}">ログアウト</a></li>
         </ul>

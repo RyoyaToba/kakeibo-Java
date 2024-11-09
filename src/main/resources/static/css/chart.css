@@ -4,3 +4,13 @@
     max-width: 100%; /* 幅を親要素に合わせて調整 */
     max-height: 500px; /* 高さも最大値を設定 */
 }
+
+#expenditure {
+    width: 80%;
+    margin: 20px auto 0 auto; /* 上に20pxの余白 */
+}
+
+#savings {
+    width: 80%;
+    margin: 20px auto 0 auto; /* 上に20pxの余白 */
+}

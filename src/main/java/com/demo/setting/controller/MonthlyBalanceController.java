@@ -13,11 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
@@ -26,13 +29,13 @@ import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 public class MonthlyBalanceController {
 
     @Autowired
+    private HttpSession session;
+
+    @Autowired
     private PaymentService paymentService;
 
     @Autowired
     private BankAccountMonthlyService bankAccountMonthlyService;
-
-    @Autowired
-    private HttpSession session;
 
     @ModelAttribute
     private AccountForm setAccountForm() {
@@ -95,5 +98,18 @@ public class MonthlyBalanceController {
 
         return "setting";
     }
+
+    @ResponseBody
+    @RequestMapping("/bankInfos")
+    public Map<String, Integer> retrieveItemPrice(@RequestBody Map<String, String> request) {
+        User user = (User) session.getAttribute("user");
+
+        System.out.println(request.get("selectedText"));
+
+        Integer selectedAccountId = Integer.parseInt(request.get("selectedText"));
+
+        return bankAccountMonthlyService.selectByTargetBanks(user.getUserId(), selectedAccountId);
+    }
+
 
 }
