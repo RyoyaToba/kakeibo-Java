@@ -1,0 +1,13 @@
+name: PR Created
+
+on:
+  pull_request:
+    types: [opened] # プルリクエストが作成されたときにトリガー
+
+jobs:
+  print-message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print message
+        run: echo "create PR!"
