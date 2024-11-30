@@ -11,7 +11,7 @@ public class LogoutController {
 
     /**
      * ログアウトし、ログイン画面へ遷移
-     * @return
+     * @return ログイン画面
      */
     @RequestMapping("")
     public String logout(HttpSession session) {
