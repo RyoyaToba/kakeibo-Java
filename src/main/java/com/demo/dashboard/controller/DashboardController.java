@@ -33,5 +33,5 @@ public class DashboardController {
 
         return "dashboard";
     }
-
+    // コメント２
 }
