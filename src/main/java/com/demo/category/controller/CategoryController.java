@@ -89,5 +89,6 @@ public class CategoryController {
 
         return "redirect:/category";
     }
+// コメント1
 
 }
