@@ -12,8 +12,6 @@ import com.demo.item.service.ItemService;
 import com.demo.user.entity.User;
 import com.demo.setting.model.Withdrawal;
 import com.demo.setting.service.WithdrawalService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +27,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/home")
 public class HomeController {
-
-    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
     private ItemService itemService;

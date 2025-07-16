@@ -2,7 +2,6 @@ package com.demo.payment.service;
 
 import com.demo.payment.entity.BankAccount;
 import com.demo.payment.model.BankAccountUI;
-import com.demo.setting.service.BankAccountMonthlyService;
 
 import java.util.Date;
 import java.util.List;
