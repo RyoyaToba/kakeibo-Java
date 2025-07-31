@@ -102,6 +102,8 @@ public class LoginController {
         List<ItemUI> itemUIs = itemService.convertItemToItemUI(itemsInTargetMonth, categories);
         // 年月選択用プルダウン
         model.addAttribute("months", CommonUtils.retrieveMonths());
+        // 対象月のItemが存在するかどうかを判定するフラグ
+        model.addAttribute("existsItems", !itemsInTargetMonth.isEmpty());
         // 登録済み情報
         model.addAttribute("items", itemUIs);
         // title部分の日付 YYYY/MM形式

@@ -55,49 +55,31 @@ public class HomeController {
     @RequestMapping("")
     public String index(String targetMonth, Model model) {
 
-        User user = (User) session.getAttribute("user");
+       User user = (User) session.getAttribute("user");
 
-        LocalDate targetDate = null;
+        LocalDate targetDate = DateUtils.resolveTargetDate(targetMonth);
+        String titleMonth = DateUtils.localDateToStringTitleMonth(targetDate);
+        LocalDate start = DateUtils.getStartOfMonth(targetDate);
+        LocalDate end = DateUtils.getEndOfMonth(targetDate);
 
-        // 初期表示の場合は当月データを取得する
-        if (targetMonth == null) {
-            targetDate = LocalDate.now();
-            targetMonth = DateUtils.localDateToStringTitleMonth(targetDate);
-        } else {
-            targetDate = commonService.convertStringToFirstLocalDate(targetMonth);
-        }
-
-        // categoryを全件取得
         List<Category> categories = categoryService.selectAll();
-        model.addAttribute("categories", categories);
-        // 対象月の月初
-        LocalDate startDate = DateUtils.getStartOfMonth(targetDate);
-        // 対象月の月末
-        LocalDate endDate = DateUtils.getEndOfMonth(targetDate);
-        // 対象月内の登録データ取得
-        List<Item> itemsInTargetMonth = itemService.retrieveItemInTargetMonth(
-                user.getUserId(),
-                DateUtils.convertLocalDateToDate(startDate),
-                DateUtils.convertLocalDateToDate(endDate));
-
-        // 対象月のItemが存在するかどうかを判定するフラグ
-        model.addAttribute("existsItems", !itemsInTargetMonth.isEmpty());
-        // UI表示形式に変換する
-        List<ItemUI> itemUIs = itemService.convertItemToItemUI(itemsInTargetMonth, categories);
-        // 年月選択用プルダウン
-        model.addAttribute("months", CommonUtils.retrieveMonths());
-        // 登録済み情報
-        model.addAttribute("items", itemUIs);
-        // title部分の日付 YYYY/MM形式
-        model.addAttribute("titleMonth", targetMonth);
-
-        // 引き落とし口座ごとに金額をまとめ、引き落としオブジェクトのリストを返す
-        List<Withdrawal> withdrawals = withdrawalService.createWithdrawal(
-                withdrawalService.calcSumprice(itemsInTargetMonth)
-                , user.getUserId()
+        List<Item> items = itemService.retrieveItemInTargetMonth(
+            user.getUserId(), 
+            DateUtils.convertLocalDateToDate(start), 
+            DateUtils.convertLocalDateToDate(end)
         );
 
-        // 各口座からの引き落とし金額
+        List<ItemUI> displayItems = itemService.convertItemToItemUI(items, categories);
+        List<Withdrawal> withdrawals = withdrawalService.createWithdrawal(
+            withdrawalService.calcSumprice(items), 
+            user.getUserId()
+        );
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("items", displayItems);
+        model.addAttribute("existsItems", !items.isEmpty());
+        model.addAttribute("months", CommonUtils.retrieveMonths());
+        model.addAttribute("titleMonth", titleMonth);
         model.addAttribute("withdrawals", withdrawals);
 
         return "index";

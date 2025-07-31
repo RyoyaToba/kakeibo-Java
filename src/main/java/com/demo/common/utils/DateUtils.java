@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -65,6 +66,23 @@ public class DateUtils {
         return formattedDate;
     }
 
+    /**
+     * targetMonth が null の場合は今月を返し、
+     * そうでない場合は文字列を LocalDate（月初）に変換する。
+     * @param targetMonth "yyyy/MM" 形式の文字列
+     * @return LocalDate（月の初日）
+     */
+    public static LocalDate resolveTargetDate(String targetMonth) {
+        if (targetMonth == null || targetMonth.isEmpty()) {
+            return LocalDate.now();
+        }
+        return convertStringToFirstLocalDate(targetMonth);
+    }
 
-
+    // 既存のメソッド例
+    public static LocalDate convertStringToFirstLocalDate(String targetMonth) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM");
+        LocalDate parsed = YearMonth.parse(targetMonth, formatter).atDay(1);
+        return parsed;
+    }
 }
