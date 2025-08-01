@@ -1,17 +1,13 @@
 package com.demo.home.controller;
 
-import com.demo.item.model.ItemUI;
 import com.demo.common.service.CommonService;
-import com.demo.common.utils.CommonUtils;
 import com.demo.common.utils.DateUtils;
-import com.demo.category.entity.Category;
+import com.demo.home.model.HomePageViewModel;
+import com.demo.home.service.impl.HomeService;
 import com.demo.item.entity.Item;
 import com.demo.registration.form.SpendingForm;
-import com.demo.category.service.CategoryService;
 import com.demo.item.service.ItemService;
 import com.demo.user.entity.User;
-import com.demo.setting.model.Withdrawal;
-import com.demo.setting.service.WithdrawalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,13 +28,10 @@ public class HomeController {
     private ItemService itemService;
 
     @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private WithdrawalService  withdrawalService;
-
-    @Autowired
     private CommonService commonService;
+
+    @Autowired
+    private HomeService homeService;
 
     @Autowired
     private HttpSession session;
@@ -55,32 +48,16 @@ public class HomeController {
     @RequestMapping("")
     public String index(String targetMonth, Model model) {
 
-       User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
 
-        LocalDate targetDate = DateUtils.resolveTargetDate(targetMonth);
-        String titleMonth = DateUtils.localDateToStringTitleMonth(targetDate);
-        LocalDate start = DateUtils.getStartOfMonth(targetDate);
-        LocalDate end = DateUtils.getEndOfMonth(targetDate);
+        if (user == null) {
+            return "redirect:/login"; // セッション切れ対応
+        }
+        
+        HomePageViewModel viewModel = homeService.buildHomePage(user.getUserId(), targetMonth);
 
-        List<Category> categories = categoryService.selectAll();
-        List<Item> items = itemService.retrieveItemInTargetMonth(
-            user.getUserId(), 
-            DateUtils.convertLocalDateToDate(start), 
-            DateUtils.convertLocalDateToDate(end)
-        );
-
-        List<ItemUI> displayItems = itemService.convertItemToItemUI(items, categories);
-        List<Withdrawal> withdrawals = withdrawalService.createWithdrawal(
-            withdrawalService.calcSumprice(items), 
-            user.getUserId()
-        );
-
-        model.addAttribute("categories", categories);
-        model.addAttribute("items", displayItems);
-        model.addAttribute("existsItems", !items.isEmpty());
-        model.addAttribute("months", CommonUtils.retrieveMonths());
-        model.addAttribute("titleMonth", titleMonth);
-        model.addAttribute("withdrawals", withdrawals);
+        // 1つのキーだけに集約
+        model.addAttribute("viewModel", viewModel);
 
         return "index";
     }

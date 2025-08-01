@@ -32,15 +32,6 @@ public class LoginController {
     @Autowired
     public UserService userService;
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private ItemService itemService;
-
-    @Autowired
-    private WithdrawalService withdrawalService;
-
     /**
      * ログインページの表示
      * @return
@@ -75,49 +66,8 @@ public class LoginController {
             return "login";
         }
 
-        User user = userService.select(userId);
+        session.setAttribute("user", userService.select(userId));
 
-        session.setAttribute("user", user);
-
-        //--------------------------------------------------
-        // 以下ログイン時にhome画面でデータを表示させるために取得する
-        //--------------------------------------------------
-
-        LocalDate targetDate = LocalDate.now();
-        String targetMonth = DateUtils.localDateToStringTitleMonth(targetDate);
-
-        // categoryを全件取得
-        List<Category> categories = categoryService.selectAll();
-        model.addAttribute("categories", categories);
-        // 対象月の月初
-        LocalDate startDate = DateUtils.getStartOfMonth(targetDate);
-        // 対象月の月末
-        LocalDate endDate = DateUtils.getEndOfMonth(targetDate);
-        // 対象月内の登録データ取得
-        List<Item> itemsInTargetMonth = itemService.retrieveItemInTargetMonth(
-                userId,
-                DateUtils.convertLocalDateToDate(startDate),
-                DateUtils.convertLocalDateToDate(endDate));
-        // UI表示形式に変換する
-        List<ItemUI> itemUIs = itemService.convertItemToItemUI(itemsInTargetMonth, categories);
-        // 年月選択用プルダウン
-        model.addAttribute("months", CommonUtils.retrieveMonths());
-        // 対象月のItemが存在するかどうかを判定するフラグ
-        model.addAttribute("existsItems", !itemsInTargetMonth.isEmpty());
-        // 登録済み情報
-        model.addAttribute("items", itemUIs);
-        // title部分の日付 YYYY/MM形式
-        model.addAttribute("titleMonth", targetMonth);
-
-        // 引き落とし口座ごとに金額をまとめ、引き落としオブジェクトのリストを返す
-        List<Withdrawal> withdrawals = withdrawalService.createWithdrawal(
-                withdrawalService.calcSumprice(itemsInTargetMonth)
-                , user.getUserId()
-        );
-
-        // 各口座からの引き落とし金額
-        model.addAttribute("withdrawals", withdrawals);
-
-        return "index";
+        return "redirect:/home";
     }
 }
